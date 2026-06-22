@@ -33,51 +33,95 @@ const { title = 'INNOVISION — Casa Productora Cinematográfica' } = Astro.prop
     (function() {
       const T = {
         es: {
-          "nav.work":"WORK","nav.about":"ABOUT","nav.manifesto":"MANIFESTO","nav.services":"SERVICES","nav.contact":"CONTACT","nav.lang":"ESP",
-          "hero.subtitle":"> CASA PRODUCTORA · QUINTANA ROO","hero.tagline":"Imagen cinematográfica sin filtros","hero.cta":"VER TRABAJO","hero.scroll":"SCROLL TO DECODE",
+          // Nav
+          "nav.work":"TRABAJO","nav.about":"SOBRE NOSOTROS","nav.manifesto":"MANIFIESTO","nav.services":"SERVICIOS","nav.contact":"CONTACTO","nav.lang":"ESP","nav.status":"SISTEMA: EN LÍNEA",
+
+          // Hero
+          "hero.subtitle":"> CASA PRODUCTORA · QUINTANA ROO","hero.tagline":"Imagen cinematográfica sin filtros","hero.cta":"VER TRABAJO","hero.scroll":"DESCIFRAR",
+
+          // Work
           "work.title":"ARCHIVO DE PROYECTOS",
-          "manifesto.header":"> RUNNING FULL SYSTEM SCAN...",
+          "work.tag_a":"[VIDEOCLIP]","work.tag_b":"[COMERCIAL]","work.tag_c":"[PELÍCULA DE MARCA]","work.tag_d":"[PRÓXIMAMENTE]",
+          "work.client_a":"Cliente / Artista","work.client_b":"Marca / Producto","work.client_c":"Marca / Artista","work.client_d":"—",
+          "work.upcoming":"PRÓXIMAMENTE",
+
+          // Manifesto
+          "manifesto.header":"> EJECUTANDO ESCANEO COMPLETO DEL SISTEMA...",
           "manifesto.p1":"Creemos en la <em>soberanía de la imagen</em>. En un mundo saturado de algoritmos y contenido descartable, producimos piezas que no piden permiso.",
           "manifesto.p2":"Cada frame es una declaración. Cada corte, una decisión deliberada. No seguimos tendencias — <em>las documentamos desde adentro</em>.",
           "manifesto.p3":"Nacimos en Quintana Roo, pero nuestro lenguaje es universal: <em>la calle habla a través de la lente</em>. Hip-hop, reggaetón, cultura urbana — filtrada sin filtros.",
           "manifesto.p4":"<em>Somos soberanos de nuestra narrativa.</em> Producción cinematográfica que no negocia su integridad.",
-          "manifesto.footer":"> SCAN COMPLETE. INTEGRITY: 100%",
-          "about.tag":"> SYSTEM_INFO","about.title":"QUIÉNES SOMOS",
+          "manifesto.footer":"> ESCANEO COMPLETO. INTEGRIDAD: 100%",
+
+          // About
+          "about.tag":"> INFO_DEL_SISTEMA","about.title":"QUIÉNES SOMOS",
           "about.p1":"<span class=\"about__bullet\" aria-hidden=\"true\">▸</span> Innovision nace en Quintana Roo como una casa productora que entiende el lenguaje de la calle y lo traduce en imagen cinematográfica de alto impacto.",
           "about.p2":"<span class=\"about__bullet\" aria-hidden=\"true\">▸</span> Nos especializamos en video musical urbano — hip-hop, reggaetón y toda la cultura que late en las calles del Caribe mexicano.",
           "about.p3":"<span class=\"about__bullet\" aria-hidden=\"true\">▸</span> Producciones comerciales, brand films y videoclips con una estética cruda, sin filtros, que no pide permiso.",
           "about.p4":"<span class=\"about__bullet\" aria-hidden=\"true\">▸</span> Cada proyecto es un sistema diagnóstico: analizamos, planificamos y ejecutamos con precisión técnica y visión creativa sin límites.",
-          "about.uptime_label":"UPTIME:","about.uptime_value":"5+ AÑOS CONTINUOS","about.base_label":"BASE:","about.base_value":"CANCÚN, QUINTANA ROO",
-          "services.index":"[ 02 ]","services.title":"CAPABILITIES",
+          "about.uptime_label":"ACTIVO:","about.uptime_value":"5+ AÑOS CONTINUOS","about.base_label":"BASE:","about.base_value":"CANCÚN, QUINTANA ROO",
+
+          // Services
+          "services.index":"[ 02 ]","services.title":"CAPACIDADES",
           "services.s1":"PRODUCCIÓN MUSICAL","services.s2":"VIDEOCLIPS URBANOS","services.s3":"COMERCIALES & BRAND FILMS","services.s4":"DIRECCIÓN CREATIVA","services.s5":"POST-PRODUCCIÓN & COLOR GRADING",
+
+          // Stats
           "stats.s1":"PROYECTOS COMPLETADOS","stats.s2":"AÑOS DE OPERACIÓN","stats.s3":"VIEWS GENERADAS","stats.s4":"ARTISTAS COLABORADORES",
-          "contact.prompt":"> ESTABLISH_CONNECTION","contact.whatsapp":"WHATSAPP","contact.instagram":"INSTAGRAM","contact.email":"EMAIL",
-          "contact.location":"LOCATION","contact.location_value":"Cancún, Quintana Roo, MX","contact.footer":"> CONNECTION READY. AWAITING INPUT...",
-          "footer.rights":"ALL RIGHTS RESERVED","footer.location":"QUINTANA ROO, MX",
-          "marquee":"// MUSIC VIDEOS // COMMERCIAL // BRAND FILMS // URBAN CULTURE // CINEMATIC PRODUCTION // QUINTANA ROO // EST. 2020 "
+
+          // Contact
+          "contact.prompt":"> ESTABLECER_CONEXIÓN","contact.whatsapp":"WHATSAPP","contact.instagram":"INSTAGRAM","contact.email":"CORREO ELECTRÓNICO",
+          "contact.location":"UBICACIÓN","contact.location_value":"Cancún, Quintana Roo, MX","contact.footer":"> CONEXIÓN LISTA. ESPERANDO INPUT...",
+
+          // Footer
+          "footer.rights":"TODOS LOS DERECHOS RESERVADOS","footer.location":"QUINTANA ROO, MX",
+
+          // Marquee
+          "marquee":"// VIDEOS MUSICALES // COMERCIAL // PELÍCULAS DE MARCA // CULTURA URBANA // PRODUCCIÓN CINEMATOGRÁFICA // QUINTANA ROO // EST. 2020 "
         },
         en: {
-          "nav.work":"WORK","nav.about":"ABOUT","nav.manifesto":"MANIFESTO","nav.services":"SERVICES","nav.contact":"CONTACT","nav.lang":"ENG",
+          // Nav
+          "nav.work":"WORK","nav.about":"ABOUT","nav.manifesto":"MANIFESTO","nav.services":"SERVICES","nav.contact":"CONTACT","nav.lang":"ENG","nav.status":"SYSTEM: ONLINE",
+
+          // Hero
           "hero.subtitle":"> PRODUCTION HOUSE · QUINTANA ROO","hero.tagline":"Cinematic image without filters","hero.cta":"VIEW WORK","hero.scroll":"SCROLL TO DECODE",
+
+          // Work
           "work.title":"PROJECT ARCHIVE",
+          "work.tag_a":"[MUSIC VIDEO]","work.tag_b":"[COMMERCIAL]","work.tag_c":"[BRAND FILM]","work.tag_d":"[UPCOMING]",
+          "work.client_a":"Client / Artist","work.client_b":"Brand / Product","work.client_c":"Brand / Artist","work.client_d":"—",
+          "work.upcoming":"COMING SOON",
+
+          // Manifesto
           "manifesto.header":"> RUNNING FULL SYSTEM SCAN...",
           "manifesto.p1":"We believe in <em>image sovereignty</em>. In a world saturated with algorithms and disposable content, we produce pieces that don't ask for permission.",
           "manifesto.p2":"Every frame is a statement. Every cut, a deliberate decision. We don't follow trends — <em>we document them from the inside</em>.",
           "manifesto.p3":"Born in Quintana Roo, but our language is universal: <em>the street speaks through the lens</em>. Hip-hop, reggaeton, urban culture — filtered without filters.",
           "manifesto.p4":"<em>We are sovereign of our narrative.</em> Cinematic production that doesn't negotiate its integrity.",
           "manifesto.footer":"> SCAN COMPLETE. INTEGRITY: 100%",
+
+          // About
           "about.tag":"> SYSTEM_INFO","about.title":"ABOUT US",
           "about.p1":"<span class=\"about__bullet\" aria-hidden=\"true\">▸</span> Innovision was born in Quintana Roo as a production house that understands the language of the street and translates it into high-impact cinematic imagery.",
           "about.p2":"<span class=\"about__bullet\" aria-hidden=\"true\">▸</span> We specialize in urban music video — hip-hop, reggaeton, and all the culture that pulses through the streets of the Mexican Caribbean.",
           "about.p3":"<span class=\"about__bullet\" aria-hidden=\"true\">▸</span> Commercial productions, brand films, and music videos with a raw aesthetic, no filters, that doesn't ask for permission.",
           "about.p4":"<span class=\"about__bullet\" aria-hidden=\"true\">▸</span> Every project is a diagnostic system: we analyze, plan, and execute with technical precision and unlimited creative vision.",
           "about.uptime_label":"UPTIME:","about.uptime_value":"5+ YEARS CONTINUOUS","about.base_label":"BASE:","about.base_value":"CANCÚN, QUINTANA ROO",
+
+          // Services
           "services.index":"[ 02 ]","services.title":"CAPABILITIES",
           "services.s1":"MUSIC PRODUCTION","services.s2":"URBAN MUSIC VIDEOS","services.s3":"COMMERCIALS & BRAND FILMS","services.s4":"CREATIVE DIRECTION","services.s5":"POST-PRODUCTION & COLOR GRADING",
+
+          // Stats
           "stats.s1":"PROJECTS COMPLETED","stats.s2":"YEARS IN OPERATION","stats.s3":"VIEWS GENERATED","stats.s4":"COLLABORATING ARTISTS",
+
+          // Contact
           "contact.prompt":"> ESTABLISH_CONNECTION","contact.whatsapp":"WHATSAPP","contact.instagram":"INSTAGRAM","contact.email":"EMAIL",
           "contact.location":"LOCATION","contact.location_value":"Cancún, Quintana Roo, MX","contact.footer":"> CONNECTION READY. AWAITING INPUT...",
+
+          // Footer
           "footer.rights":"ALL RIGHTS RESERVED","footer.location":"QUINTANA ROO, MX",
+
+          // Marquee
           "marquee":"// MUSIC VIDEOS // COMMERCIAL // BRAND FILMS // URBAN CULTURE // CINEMATIC PRODUCTION // QUINTANA ROO // EST. 2020 "
         }
       };
@@ -95,6 +139,9 @@ const { title = 'INNOVISION — Casa Productora Cinematográfica' } = Astro.prop
         var btn = document.getElementById("lang-toggle");
         if (btn) btn.textContent = d["nav.lang"] || lang.toUpperCase();
         document.documentElement.lang = lang === "es" ? "es" : "en";
+        // Nav status
+        var statusEl = document.querySelector(".nav__status-text");
+        if (statusEl && d["nav.status"]) statusEl.textContent = d["nav.status"];
         // Marquee
         var mq = d["marquee"];
         if (mq) {
