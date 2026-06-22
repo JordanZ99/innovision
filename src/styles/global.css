@@ -120,7 +120,7 @@ ul, ol {
   background: linear-gradient(
     180deg,
     transparent,
-    var(--color-green-neon),
+    var(--color-orange),
     transparent
   );
   opacity: 0.12;
