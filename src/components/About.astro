@@ -274,8 +274,7 @@
     transition: opacity 0.25s ease;
   }
 
-  /* Show play/pause button only when hovering the video frame */
-  .about__video-frame:hover .about__play-btn,
+  /* Show play/pause button only when JS adds .show-controls */
   .about__video-frame.show-controls .about__play-btn {
     opacity: 1;
     pointer-events: auto;
@@ -726,13 +725,24 @@
       }
     });
 
-    // ── Hover: show controls only when mouse is over the video frame ──
-    videoFrame.addEventListener('mouseenter', () => {
+    // ── Auto-hide controls after 3s of mouse inactivity ──
+    let controlsTimer: ReturnType<typeof setTimeout> | null = null;
+
+    function showControls() {
       videoFrame.classList.add('show-controls');
-    });
-    videoFrame.addEventListener('mouseleave', () => {
+      if (controlsTimer) clearTimeout(controlsTimer);
+      controlsTimer = setTimeout(() => {
+        videoFrame.classList.remove('show-controls');
+      }, 3000);
+    }
+
+    function hideControls() {
+      if (controlsTimer) clearTimeout(controlsTimer);
       videoFrame.classList.remove('show-controls');
-    });
+    }
+
+    videoFrame.addEventListener('mousemove', showControls);
+    videoFrame.addEventListener('mouseleave', hideControls);
 
     // ── Timecode + Progress: driven by video.timeupdate ──
     video.addEventListener('timeupdate', () => {
