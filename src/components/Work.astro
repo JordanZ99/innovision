@@ -24,7 +24,7 @@
             loading="lazy"
           />
           <div class="work__module-overlay">
-            <button class="work__module-play">▶ PLAY_PREVIEW</button>
+            <button class="work__module-play"><span>▶ PLAY_PREVIEW</span></button>
           </div>
         </div>
         <div class="work__module-meta">
@@ -53,7 +53,7 @@
             loading="lazy"
           />
           <div class="work__module-overlay">
-            <button class="work__module-play">▶ PLAY_PREVIEW</button>
+            <button class="work__module-play"><span>▶ PLAY_PREVIEW</span></button>
           </div>
         </div>
         <div class="work__module-meta">
@@ -82,7 +82,7 @@
             loading="lazy"
           />
           <div class="work__module-overlay">
-            <button class="work__module-play">▶ PLAY_PREVIEW</button>
+            <button class="work__module-play"><span>▶ PLAY_PREVIEW</span></button>
           </div>
         </div>
         <div class="work__module-meta">
@@ -283,10 +283,19 @@
     letter-spacing: 0.1em;
     color: var(--color-orange);
     background: transparent;
-    border: 1px solid var(--color-orange);
+    border: none;
     padding: 12px 28px;
     cursor: pointer;
     text-transform: uppercase;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  .work__module-play::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--color-orange);
     clip-path: polygon(
       8px 0%,
       100% 0%,
@@ -295,12 +304,36 @@
       0% 100%,
       0% 8px
     );
-    transition: background 0.3s ease, color 0.3s ease;
+    z-index: 0;
+  }
+
+  .work__module-play::after {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    background: #0d0d0d;
+    clip-path: polygon(
+      7px 0%,
+      100% 0%,
+      100% calc(100% - 7px),
+      calc(100% - 7px) 100%,
+      0% 100%,
+      0% 7px
+    );
+    z-index: 1;
+  }
+
+  .work__module-play:hover::after {
+    background: var(--color-orange);
   }
 
   .work__module-play:hover {
-    background: var(--color-orange);
     color: var(--color-void);
+  }
+
+  .work__module-play span {
+    position: relative;
+    z-index: 2;
   }
 
   /* ── Metadata ── */
