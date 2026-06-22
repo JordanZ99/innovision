@@ -1,0 +1,131 @@
+---
+// Footer — Logo watermark, social links, copyright
+---
+
+<footer class="footer">
+  <div class="footer__inner">
+    <!-- Logo -->
+    <div class="footer__logo">
+      <img src="/logo.png" alt="INNOVISION" width="48" height="48" />
+    </div>
+
+    <!-- Watermark -->
+    <div class="footer__watermark" aria-hidden="true">INNOVISION</div>
+
+    <!-- Social links -->
+    <div class="footer__socials">
+      <a href="https://instagram.com/innovision" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="2" width="20" height="20" rx="5"/>
+          <circle cx="12" cy="12" r="5"/>
+          <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+      <a href="https://youtube.com/@innovision" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="YouTube">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
+          <polygon points="9.75,15.02 15.5,11.75 9.75,8.48" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+      <a href="https://tiktok.com/@innovision" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="TikTok">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Copyright -->
+    <div class="footer__copy">
+      <span>© 2025 INNOVISION</span>
+      <span class="footer__copy-sep">//</span>
+      <span>ALL RIGHTS RESERVED</span>
+      <span class="footer__copy-sep">//</span>
+      <span>QUINTANA ROO, MX</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-void);
+    border-top: 1px solid var(--color-steel);
+    padding: 60px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .footer__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .footer__logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    opacity: 0.8;
+  }
+
+  .footer__watermark {
+    font-family: var(--font-display);
+    font-size: clamp(60px, 10vw, 140px);
+    color: var(--color-white-static);
+    opacity: 0.03;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    text-transform: uppercase;
+  }
+
+  .footer__socials {
+    display: flex;
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer__social-link {
+    color: var(--color-steel);
+    transition: color 0.3s ease;
+    padding: 8px;
+  }
+
+  .footer__social-link:hover {
+    color: var(--color-orange);
+  }
+
+  .footer__copy {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--color-steel);
+    text-transform: uppercase;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer__copy-sep {
+    margin: 0 8px;
+    color: var(--color-steel);
+  }
+
+  @media (max-width: 768px) {
+    .footer {
+      padding: 40px 20px 30px;
+    }
+
+    .footer__copy {
+      font-size: 8px;
+    }
+  }
+</style>

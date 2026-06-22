@@ -1,0 +1,402 @@
+---
+// Work / Portfolio — HUD modules with scroll mask reveal
+---
+
+<section class="work section-pad" id="work">
+  <div class="work__header reveal">
+    <span class="work__index">[ 01 ]</span>
+    <h2 class="work__title">ARCHIVO DE PROYECTOS</h2>
+  </div>
+
+  <div class="work__grid">
+    <!-- Module A -->
+    <div class="work__module reveal" data-module="A">
+      <div class="work__module-frame">
+        <div class="work__module-corner work__module-corner--tl" aria-hidden="true"></div>
+        <div class="work__module-corner work__module-corner--tr" aria-hidden="true"></div>
+        <div class="work__module-corner work__module-corner--bl" aria-hidden="true"></div>
+        <div class="work__module-corner work__module-corner--br" aria-hidden="true"></div>
+        <div class="work__module-screen">
+          <img
+            src="/Fotografia-Raperos-contrapicado.jpg"
+            alt="URBAN VISION — Videoclip production"
+            class="work__module-img"
+            loading="lazy"
+          />
+          <div class="work__module-overlay">
+            <button class="work__module-play">▶ PLAY_PREVIEW</button>
+          </div>
+        </div>
+        <div class="work__module-meta">
+          <span class="work__module-meta-label">RES: 4K · FPS: 24 · STATUS: ARCHIVED</span>
+        </div>
+        <div class="work__module-info">
+          <span class="work__module-tag">[VIDEOCLIP]</span>
+          <h3 class="work__module-name">URBAN VISION</h3>
+          <p class="work__module-client">Cliente / Artista</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module B -->
+    <div class="work__module reveal" data-module="B">
+      <div class="work__module-frame">
+        <div class="work__module-corner work__module-corner--tl" aria-hidden="true"></div>
+        <div class="work__module-corner work__module-corner--tr" aria-hidden="true"></div>
+        <div class="work__module-corner work__module-corner--bl" aria-hidden="true"></div>
+        <div class="work__module-corner work__module-corner--br" aria-hidden="true"></div>
+        <div class="work__module-screen">
+          <img
+            src="/Fotografia-boxeadores.jpg"
+            alt="RING / IMPACT — Commercial production"
+            class="work__module-img"
+            loading="lazy"
+          />
+          <div class="work__module-overlay">
+            <button class="work__module-play">▶ PLAY_PREVIEW</button>
+          </div>
+        </div>
+        <div class="work__module-meta">
+          <span class="work__module-meta-label">RES: 4K · FPS: 60 · STATUS: ARCHIVED</span>
+        </div>
+        <div class="work__module-info">
+          <span class="work__module-tag">[COMMERCIAL]</span>
+          <h3 class="work__module-name">RING / IMPACT</h3>
+          <p class="work__module-client">Marca / Producto</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module C -->
+    <div class="work__module reveal" data-module="C">
+      <div class="work__module-frame">
+        <div class="work__module-corner work__module-corner--tl" aria-hidden="true"></div>
+        <div class="work__module-corner work__module-corner--tr" aria-hidden="true"></div>
+        <div class="work__module-corner work__module-corner--bl" aria-hidden="true"></div>
+        <div class="work__module-corner work__module-corner--br" aria-hidden="true"></div>
+        <div class="work__module-screen">
+          <img
+            src="/Fotografia-Grafiti.jpg"
+            alt="STREET CODE — Brand film production"
+            class="work__module-img"
+            loading="lazy"
+          />
+          <div class="work__module-overlay">
+            <button class="work__module-play">▶ PLAY_PREVIEW</button>
+          </div>
+        </div>
+        <div class="work__module-meta">
+          <span class="work__module-meta-label">RES: 4K · FPS: 24 · STATUS: ARCHIVED</span>
+        </div>
+        <div class="work__module-info">
+          <span class="work__module-tag">[BRAND FILM]</span>
+          <h3 class="work__module-name">STREET CODE</h3>
+          <p class="work__module-client">Marca / Artista</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module D — Empty placeholder -->
+    <div class="work__module work__module--empty reveal" data-module="D">
+      <div class="work__module-frame">
+        <div class="work__module-corner work__module-corner--tl" aria-hidden="true"></div>
+        <div class="work__module-corner work__module-corner--tr" aria-hidden="true"></div>
+        <div class="work__module-corner work__module-corner--bl" aria-hidden="true"></div>
+        <div class="work__module-corner work__module-corner--br" aria-hidden="true"></div>
+        <div class="work__module-screen work__module-screen--empty">
+          <!-- IMAGEN FALTANTE: video/foto de proyecto adicional -->
+          <div class="work__module-scanlines"></div>
+          <span class="work__module-placeholder-text">NO_SIGNAL</span>
+        </div>
+        <div class="work__module-meta">
+          <span class="work__module-meta-label">RES: --- · FPS: -- · STATUS: PENDING</span>
+        </div>
+        <div class="work__module-info">
+          <span class="work__module-tag">[UPCOMING]</span>
+          <h3 class="work__module-name">PROXIMAMENTE</h3>
+          <p class="work__module-client">—</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .work {
+    background: var(--color-void);
+  }
+
+  .work__header {
+    margin-bottom: 60px;
+  }
+
+  .work__index {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--color-orange);
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .work__title {
+    font-family: var(--font-mono);
+    font-size: clamp(20px, 3vw, 32px);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-white-static);
+    text-transform: uppercase;
+  }
+
+  /* ── Grid ── */
+  .work__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  .work__module--empty {
+    grid-column: 1 / -1;
+  }
+
+  /* ── Module Frame ── */
+  .work__module-frame {
+    position: relative;
+    border: 2px solid var(--color-steel);
+    background: var(--color-concrete);
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
+    overflow: hidden;
+  }
+
+  .work__module:hover .work__module-frame {
+    border-color: var(--color-orange);
+    box-shadow: 0 0 20px rgba(255, 77, 0, 0.3);
+  }
+
+  /* ── Corner accents ── */
+  .work__module-corner {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    z-index: 3;
+  }
+
+  .work__module-corner--tl {
+    top: -1px;
+    left: -1px;
+    border-top: 2px solid var(--color-orange);
+    border-left: 2px solid var(--color-orange);
+  }
+
+  .work__module-corner--tr {
+    top: -1px;
+    right: -1px;
+    border-top: 2px solid var(--color-orange);
+    border-right: 2px solid var(--color-orange);
+  }
+
+  .work__module-corner--bl {
+    bottom: -1px;
+    left: -1px;
+    border-bottom: 2px solid var(--color-orange);
+    border-left: 2px solid var(--color-orange);
+  }
+
+  .work__module-corner--br {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 2px solid var(--color-orange);
+    border-right: 2px solid var(--color-orange);
+  }
+
+  /* ── Screen ── */
+  .work__module-screen {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
+
+  .work__module-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1.2s var(--ease-out-expo);
+    filter: grayscale(0.2) contrast(1.05);
+    will-change: transform;
+  }
+
+  .work__module.revealed .work__module-img {
+    transform: scaleX(1);
+  }
+
+  /* ── Empty screen ── */
+  .work__module-screen--empty {
+    background: var(--color-void);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 16 / 10;
+  }
+
+  .work__module-scanlines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 77, 0, 0.03) 2px,
+      rgba(255, 77, 0, 0.03) 4px
+    );
+  }
+
+  .work__module-placeholder-text {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--color-steel);
+    letter-spacing: 0.2em;
+    z-index: 1;
+  }
+
+  /* ── Overlay ── */
+  .work__module-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 10, 10, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .work__module:hover .work__module-overlay {
+    opacity: 1;
+  }
+
+  .work__module-play {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--color-orange);
+    background: transparent;
+    border: 1px solid var(--color-orange);
+    padding: 12px 28px;
+    cursor: pointer;
+    text-transform: uppercase;
+    clip-path: polygon(
+      8px 0%, calc(100% - 8px) 0%,
+      100% 8px, 100% calc(100% - 8px),
+      calc(100% - 8px) 100%, 8px 100%,
+      0% calc(100% - 8px), 0% 8px
+    );
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  .work__module-play:hover {
+    background: var(--color-orange);
+    color: var(--color-void);
+  }
+
+  /* ── Metadata ── */
+  .work__module-meta {
+    padding: 8px 16px;
+    border-top: 1px solid var(--color-steel);
+  }
+
+  .work__module-meta-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--color-amber);
+    opacity: 0.6;
+  }
+
+  /* ── Info ── */
+  .work__module-info {
+    padding: 16px;
+    border-top: 1px solid var(--color-steel);
+  }
+
+  .work__module-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--color-orange);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .work__module-name {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--color-white-static);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .work__module-client {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-steel);
+    margin-top: 4px;
+  }
+
+  @media (max-width: 768px) {
+    .work__grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .work__module--empty {
+      grid-column: 1;
+    }
+  }
+</style>
+
+<script>
+  function initWork() {
+    // IntersectionObserver for scroll mask reveal
+    const modules = document.querySelectorAll('.work__module');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    modules.forEach((module) => observer.observe(module));
+
+    // Reveal headers
+    const reveals = document.querySelectorAll('.work .reveal');
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    reveals.forEach((el) => revealObserver.observe(el));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initWork);
+  } else {
+    initWork();
+  }
+</script>

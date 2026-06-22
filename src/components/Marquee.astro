@@ -1,0 +1,77 @@
+---
+// Marquee — Infinite scrolling data line
+---
+
+<div class="marquee">
+  <div class="marquee__track" aria-hidden="true">
+    <span class="marquee__content">
+      <span class="marquee__sep">//</span> MUSIC VIDEOS
+      <span class="marquee__sep">//</span> COMMERCIAL
+      <span class="marquee__sep">//</span> BRAND FILMS
+      <span class="marquee__sep">//</span> URBAN CULTURE
+      <span class="marquee__sep">//</span> CINEMATIC PRODUCTION
+      <span class="marquee__sep">//</span> QUINTANA ROO
+      <span class="marquee__sep">//</span> EST. 2020
+      <span class="marquee__sep">//</span> MUSIC VIDEOS
+      <span class="marquee__sep">//</span> COMMERCIAL
+      <span class="marquee__sep">//</span> BRAND FILMS
+      <span class="marquee__sep">//</span> URBAN CULTURE
+      <span class="marquee__sep">//</span> CINEMATIC PRODUCTION
+      <span class="marquee__sep">//</span> QUINTANA ROO
+      <span class="marquee__sep">//</span> EST. 2020
+    </span>
+    <span class="marquee__content" aria-hidden="true">
+      <span class="marquee__sep">//</span> MUSIC VIDEOS
+      <span class="marquee__sep">//</span> COMMERCIAL
+      <span class="marquee__sep">//</span> BRAND FILMS
+      <span class="marquee__sep">//</span> URBAN CULTURE
+      <span class="marquee__sep">//</span> CINEMATIC PRODUCTION
+      <span class="marquee__sep">//</span> QUINTANA ROO
+      <span class="marquee__sep">//</span> EST. 2020
+      <span class="marquee__sep">//</span> MUSIC VIDEOS
+      <span class="marquee__sep">//</span> COMMERCIAL
+      <span class="marquee__sep">//</span> BRAND FILMS
+      <span class="marquee__sep">//</span> URBAN CULTURE
+      <span class="marquee__sep">//</span> CINEMATIC PRODUCTION
+      <span class="marquee__sep">//</span> QUINTANA ROO
+      <span class="marquee__sep">//</span> EST. 2020
+    </span>
+  </div>
+</div>
+
+<style>
+  .marquee {
+    background: var(--color-concrete);
+    height: 60px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border-top: 1px solid var(--color-steel);
+    border-bottom: 1px solid var(--color-steel);
+  }
+
+  .marquee__track {
+    display: flex;
+    white-space: nowrap;
+    animation: marqueeScroll 30s linear infinite;
+    will-change: transform;
+  }
+
+  .marquee__content {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-orange);
+    padding: 0 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .marquee__sep {
+    color: var(--color-steel);
+    font-weight: 400;
+  }
+</style>

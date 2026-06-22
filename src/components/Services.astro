@@ -1,0 +1,156 @@
+---
+// Services — Technical spec sheet style
+const services = [
+  { id: '01', name: 'PRODUCCIÓN MUSICAL', hex: '0x01' },
+  { id: '02', name: 'VIDEOCLIPS URBANOS', hex: '0x02' },
+  { id: '03', name: 'COMERCIALES & BRAND FILMS', hex: '0x03' },
+  { id: '04', name: 'DIRECCIÓN CREATIVA', hex: '0x04' },
+  { id: '05', name: 'POST-PRODUCCIÓN & COLOR GRADING', hex: '0x05' },
+];
+---
+
+<section class="services section-pad" id="services">
+  <!-- IMAGEN FALTANTE: mapa topográfico Quintana Roo (used as subtle background at 5% opacity) -->
+
+  <div class="services__header reveal">
+    <span class="services__index">[ 02 ]</span>
+    <h2 class="services__title">CAPABILITIES</h2>
+  </div>
+
+  <div class="services__list">
+    {services.map((service) => (
+      <div class="services__item reveal">
+        <span class="services__item-id">{service.id}</span>
+        <span class="services__item-name">{service.name}</span>
+        <span class="services__item-dots"></span>
+        <span class="services__item-hex">// {service.hex}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .services {
+    background: var(--color-void);
+    position: relative;
+  }
+
+  .services__header {
+    margin-bottom: 60px;
+  }
+
+  .services__index {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--color-steel);
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .services__title {
+    font-family: var(--font-mono);
+    font-size: clamp(20px, 3vw, 32px);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-white-static);
+    text-transform: uppercase;
+  }
+
+  /* ── List ── */
+  .services__list {
+    max-width: 900px;
+  }
+
+  .services__item {
+    display: flex;
+    align-items: baseline;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--color-steel);
+    cursor: default;
+    transition: padding-left 0.4s var(--ease-out-expo);
+  }
+
+  .services__item:hover {
+    padding-left: 8px;
+  }
+
+  .services__item-id {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-steel);
+    min-width: 36px;
+    letter-spacing: 0.05em;
+  }
+
+  .services__item-name {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-white-static);
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  .services__item-dots {
+    flex: 1;
+    border-bottom: 1px dotted var(--color-steel);
+    margin: 0 12px;
+    min-width: 20px;
+    align-self: center;
+    margin-bottom: 4px;
+  }
+
+  .services__item-hex {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-steel);
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+    transition: color 0.3s ease;
+  }
+
+  .services__item:hover .services__item-hex {
+    color: var(--color-orange);
+  }
+
+  .services__item:hover .services__item-name {
+    color: var(--color-orange);
+  }
+
+  @media (max-width: 768px) {
+    .services__item-name {
+      font-size: 11px;
+    }
+
+    .services__item-hex {
+      font-size: 10px;
+    }
+  }
+</style>
+
+<script>
+  function initServices() {
+    const reveals = document.querySelectorAll('.services .reveal');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    reveals.forEach((el) => observer.observe(el));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initServices);
+  } else {
+    initServices();
+  }
+</script>

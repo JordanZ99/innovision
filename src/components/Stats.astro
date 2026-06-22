@@ -1,0 +1,180 @@
+---
+// Stats — Diagnostic panel with count-up animation
+const stats = [
+  { label: 'PROYECTOS COMPLETADOS', value: 50, suffix: '+', icon: 'warning' },
+  { label: 'AÑOS DE OPERACIÓN', value: 5, suffix: '+', icon: 'warning' },
+  { label: 'VIEWS GENERADAS', value: 12, suffix: 'M+', icon: 'warning' },
+  { label: 'ARTISTAS COLABORADORES', value: 40, suffix: '+', icon: 'warning' },
+];
+---
+
+<section class="stats section-pad" id="stats">
+  <div class="stats__sweep" aria-hidden="true"></div>
+
+  <div class="stats__grid">
+    {stats.map((stat) => (
+      <div class="stats__panel reveal">
+        <div class="stats__panel-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M8 1L15 14H1L8 1Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            <line x1="8" y1="6" x2="8" y2="10" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="8" cy="12" r="0.8" fill="currentColor"/>
+          </svg>
+        </div>
+        <span class="stats__number" data-target={stat.value} data-suffix={stat.suffix}>0</span>
+        <span class="stats__label">{stat.label}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .stats {
+    background: var(--color-concrete);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stats__sweep {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(0, 212, 255, 0.02) 3px,
+      rgba(0, 212, 255, 0.02) 6px
+    );
+    animation: floatScanline 2s linear infinite;
+    pointer-events: none;
+  }
+
+  .stats__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .stats__panel {
+    border: 1px solid var(--color-steel);
+    padding: 32px 24px;
+    text-align: center;
+    position: relative;
+    background: var(--color-void);
+    transition: border-color 0.3s ease;
+  }
+
+  .stats__panel:hover {
+    border-color: var(--color-orange);
+  }
+
+  .stats__panel-icon {
+    color: var(--color-amber);
+    margin-bottom: 16px;
+  }
+
+  .stats__number {
+    font-family: var(--font-mono);
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 700;
+    color: var(--color-orange);
+    display: block;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .stats__label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--color-white-static);
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 900px) {
+    .stats__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .stats__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  function initStats() {
+    // IntersectionObserver for reveal
+    const panels = document.querySelectorAll('.stats__panel');
+    const reveals = document.querySelectorAll('.stats .reveal');
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    reveals.forEach((el) => revealObserver.observe(el));
+
+    // Count-up animation
+    const numbers = document.querySelectorAll('.stats__number');
+    let counted = false;
+
+    const countObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !counted) {
+            counted = true;
+            numbers.forEach((numEl) => {
+              const el = numEl as HTMLElement;
+              const target = parseInt(el.dataset.target || '0', 10);
+              const suffix = el.dataset.suffix || '';
+              const duration = 2000;
+              const startTime = Date.now();
+
+              function animate() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                // Ease out
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const current = Math.round(target * eased);
+                el.textContent = current + suffix;
+
+                if (progress < 1) {
+                  requestAnimationFrame(animate);
+                }
+              }
+
+              animate();
+            });
+            countObserver.disconnect();
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    if (panels.length > 0) {
+      countObserver.observe(panels[0]);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initStats);
+  } else {
+    initStats();
+  }
+</script>

@@ -1,0 +1,278 @@
+---
+// Contact — Terminal style with direct contact info
+---
+
+<section class="contact section-pad" id="contact">
+  <div class="contact__terminal reveal">
+    <!-- Terminal bar -->
+    <div class="contact__bar">
+      <span class="contact__dot contact__dot--red"></span>
+      <span class="contact__dot contact__dot--yellow"></span>
+      <span class="contact__dot contact__dot--green"></span>
+      <span class="contact__bar-title">COMM_MODULE.EXE</span>
+    </div>
+
+    <div class="contact__body">
+      <div class="contact__header">
+        <span class="contact__prompt">&gt; ESTABLISH_CONNECTION</span>
+        <span class="contact__cursor">_</span>
+      </div>
+
+      <div class="contact__grid">
+        <!-- WhatsApp -->
+        <a href="https://wa.me/529981234567" target="_blank" rel="noopener noreferrer" class="contact__item">
+          <div class="contact__item-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/>
+              <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1zm0 0a5 5 0 0 0 5 5m0 0a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1h1z"/>
+            </svg>
+          </div>
+          <div class="contact__item-info">
+            <span class="contact__item-label">WHATSAPP</span>
+            <span class="contact__item-value">+52 998 123 4567</span>
+          </div>
+          <span class="contact__item-status">● ONLINE</span>
+        </a>
+
+        <!-- Instagram -->
+        <a href="https://instagram.com/innovision" target="_blank" rel="noopener noreferrer" class="contact__item">
+          <div class="contact__item-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <circle cx="12" cy="12" r="5"/>
+              <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <div class="contact__item-info">
+            <span class="contact__item-label">INSTAGRAM</span>
+            <span class="contact__item-value">@innovision</span>
+          </div>
+          <span class="contact__item-status">● ACTIVE</span>
+        </a>
+
+        <!-- Email -->
+        <a href="mailto:contacto@innovision.mx" class="contact__item">
+          <div class="contact__item-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <polyline points="22,4 12,13 2,4"/>
+            </svg>
+          </div>
+          <div class="contact__item-info">
+            <span class="contact__item-label">EMAIL</span>
+            <span class="contact__item-value">contacto@innovision.mx</span>
+          </div>
+          <span class="contact__item-status">● ACTIVE</span>
+        </a>
+
+        <!-- Location -->
+        <div class="contact__item contact__item--static">
+          <div class="contact__item-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div class="contact__item-info">
+            <span class="contact__item-label">LOCATION</span>
+            <span class="contact__item-value">Cancún, Quintana Roo, MX</span>
+          </div>
+          <span class="contact__item-status">● BASED HERE</span>
+        </div>
+      </div>
+
+      <div class="contact__footer">
+        <span class="contact__prompt contact__prompt--green">&gt; CONNECTION READY. AWAITING INPUT...</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    background: var(--color-void);
+    position: relative;
+  }
+
+  .contact::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.05) 2px,
+      rgba(0, 0, 0, 0.05) 4px
+    );
+    pointer-events: none;
+  }
+
+  .contact__terminal {
+    max-width: 800px;
+    margin: 0 auto;
+    border: 1px solid var(--color-steel);
+    background: var(--color-concrete);
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact__bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-steel);
+    background: var(--color-void);
+  }
+
+  .contact__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .contact__dot--red { background: var(--color-red-neon); }
+  .contact__dot--yellow { background: var(--color-amber); }
+  .contact__dot--green { background: var(--color-green-neon); }
+
+  .contact__bar-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--color-steel);
+    margin-left: 12px;
+    text-transform: uppercase;
+  }
+
+  .contact__body {
+    padding: 40px;
+  }
+
+  .contact__header {
+    margin-bottom: 36px;
+  }
+
+  .contact__prompt {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--color-blue-neon);
+    letter-spacing: 0.05em;
+  }
+
+  .contact__prompt--green {
+    color: var(--color-green-neon);
+  }
+
+  .contact__cursor {
+    display: inline-block;
+    color: var(--color-blue-neon);
+    animation: cursorBlink 0.7s step-end infinite;
+    margin-left: 2px;
+  }
+
+  .contact__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .contact__item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease, background 0.3s ease;
+    cursor: pointer;
+  }
+
+  .contact__item:hover {
+    border-color: var(--color-orange);
+    background: rgba(255, 77, 0, 0.05);
+  }
+
+  .contact__item-icon {
+    color: var(--color-orange);
+    flex-shrink: 0;
+  }
+
+  .contact__item-info {
+    flex: 1;
+  }
+
+  .contact__item-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--color-steel);
+    display: block;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+
+  .contact__item-value {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-white-static);
+    letter-spacing: 0.03em;
+  }
+
+  .contact__item-status {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--color-green-neon);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  .contact__footer {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-steel);
+  }
+
+  @media (max-width: 768px) {
+    .contact__body {
+      padding: 24px;
+    }
+
+    .contact__item {
+      padding: 12px;
+      gap: 12px;
+    }
+
+    .contact__item-value {
+      font-size: 11px;
+    }
+
+    .contact__item-status {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  function initContact() {
+    const reveals = document.querySelectorAll('.contact .reveal');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    reveals.forEach((el) => observer.observe(el));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initContact);
+  } else {
+    initContact();
+  }
+</script>

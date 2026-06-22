@@ -1,0 +1,252 @@
+---
+// About — Split layout: image left / text right
+---
+
+<section class="about section-pad" id="about">
+  <div class="about__inner">
+    <!-- Image side -->
+    <div class="about__image-wrap reveal">
+      <div class="about__image-frame">
+        <div class="about__image-corner about__image-corner--tl" aria-hidden="true"></div>
+        <div class="about__image-corner about__image-corner--tr" aria-hidden="true"></div>
+        <div class="about__image-corner about__image-corner--bl" aria-hidden="true"></div>
+        <div class="about__image-corner about__image-corner--br" aria-hidden="true"></div>
+        <img
+          src="/Fotografia-Raperos-contrapicado.jpg"
+          alt="INNOVISION — Casa productora cinematográfica"
+          class="about__image"
+          loading="lazy"
+        />
+        <div class="about__image-overlay"></div>
+      </div>
+      <div class="about__image-label">
+        <span>SYS_MODULE: INO_VISUAL_CORE</span>
+        <span>STATUS: ACTIVE</span>
+      </div>
+    </div>
+
+    <!-- Text side -->
+    <div class="about__text">
+      <div class="about__header reveal">
+        <span class="about__tag">&gt; SYSTEM_INFO</span>
+        <h2 class="about__title">QUIÉNES SOMOS</h2>
+      </div>
+
+      <div class="about__content reveal">
+        <p class="about__paragraph">
+          <span class="about__bullet" aria-hidden="true">▸</span>
+          Innovision nace en Quintana Roo como una casa productora que entiende el lenguaje de la calle y lo traduce en imagen cinematográfica de alto impacto.
+        </p>
+        <p class="about__paragraph">
+          <span class="about__bullet" aria-hidden="true">▸</span>
+          Nos especializamos en video musical urbano — hip-hop, reggaetón y toda la cultura que late en las calles del Caribe mexicano.
+        </p>
+        <p class="about__paragraph">
+          <span class="about__bullet" aria-hidden="true">▸</span>
+          Producciones comerciales, brand films y videoclips con una estética cruda, sin filtros, que no pide permiso.
+        </p>
+        <p class="about__paragraph">
+          <span class="about__bullet" aria-hidden="true">▸</span>
+          Cada proyecto es un sistema diagnóstico: analizamos, planificamos y ejecutamos con precisión técnica y visión creativa sin límites.
+        </p>
+      </div>
+
+      <div class="about__footer reveal">
+        <div class="about__stat-line">
+          <span class="about__stat-label">UPTIME:</span>
+          <span class="about__stat-value">5+ AÑOS CONTINUOS</span>
+        </div>
+        <div class="about__stat-line">
+          <span class="about__stat-label">BASE:</span>
+          <span class="about__stat-value">CANCÚN, QUINTANA ROO</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    background: var(--color-void);
+    position: relative;
+  }
+
+  .about__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ── Image side ── */
+  .about__image-frame {
+    position: relative;
+    border: 2px solid var(--color-steel);
+    overflow: hidden;
+  }
+
+  .about__image {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    filter: grayscale(0.3) contrast(1.1);
+    display: block;
+  }
+
+  .about__image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      transparent 60%,
+      rgba(10, 10, 10, 0.5)
+    );
+    pointer-events: none;
+  }
+
+  .about__image-corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    z-index: 2;
+  }
+
+  .about__image-corner--tl {
+    top: -1px;
+    left: -1px;
+    border-top: 2px solid var(--color-orange);
+    border-left: 2px solid var(--color-orange);
+  }
+
+  .about__image-corner--tr {
+    top: -1px;
+    right: -1px;
+    border-top: 2px solid var(--color-orange);
+    border-right: 2px solid var(--color-orange);
+  }
+
+  .about__image-corner--bl {
+    bottom: -1px;
+    left: -1px;
+    border-bottom: 2px solid var(--color-orange);
+    border-left: 2px solid var(--color-orange);
+  }
+
+  .about__image-corner--br {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 2px solid var(--color-orange);
+    border-right: 2px solid var(--color-orange);
+  }
+
+  .about__image-label {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border: 1px solid var(--color-steel);
+    border-top: none;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--color-steel);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── Text side ── */
+  .about__header {
+    margin-bottom: 32px;
+  }
+
+  .about__tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-green-neon);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .about__title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 400;
+    color: var(--color-white-static);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .about__content {
+    margin-bottom: 40px;
+  }
+
+  .about__paragraph {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--color-white-static);
+    margin-bottom: 20px;
+    opacity: 0.85;
+  }
+
+  .about__bullet {
+    color: var(--color-orange);
+    margin-right: 8px;
+  }
+
+  .about__footer {
+    border-top: 1px solid var(--color-steel);
+    padding-top: 20px;
+  }
+
+  .about__stat-line {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .about__stat-label {
+    color: var(--color-steel);
+    min-width: 60px;
+  }
+
+  .about__stat-value {
+    color: var(--color-amber);
+  }
+
+  @media (max-width: 900px) {
+    .about__inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+</style>
+
+<script>
+  function initAbout() {
+    const reveals = document.querySelectorAll('.about .reveal');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    reveals.forEach((el) => observer.observe(el));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAbout);
+  } else {
+    initAbout();
+  }
+</script>

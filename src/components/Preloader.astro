@@ -1,0 +1,267 @@
+---
+// Preloader — Terminal typewriter with HUD progress bar
+---
+
+<div id="preloader" class="preloader">
+  <div class="preloader__scanlines" aria-hidden="true"></div>
+  <div class="preloader__content">
+    <div class="preloader__terminal">
+      <div id="preloader-text" class="preloader__text"></div>
+    </div>
+    <div class="preloader__progress">
+      <div class="preloader__progress-track">
+        <div id="preloader-bar" class="preloader__progress-bar"></div>
+      </div>
+      <span id="preloader-percent" class="preloader__percent">0%</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--color-void);
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+
+  .preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .preloader__scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.15) 2px,
+      rgba(0, 0, 0, 0.15) 4px
+    );
+    pointer-events: none;
+    animation: floatScanline 0.5s linear infinite;
+  }
+
+  .preloader__content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    width: 400px;
+    max-width: 90vw;
+  }
+
+  .preloader__terminal {
+    margin-bottom: 40px;
+    text-align: left;
+  }
+
+  .preloader__text {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-green-neon);
+    line-height: 2;
+    min-height: 60px;
+  }
+
+  .preloader__text .line {
+    display: block;
+    opacity: 0;
+  }
+
+  .preloader__text .line.visible {
+    opacity: 1;
+  }
+
+  .preloader__text .cursor {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    background: var(--color-green-neon);
+    animation: cursorBlink 0.7s step-end infinite;
+    vertical-align: middle;
+    margin-left: 2px;
+  }
+
+  .preloader__progress {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .preloader__progress-track {
+    flex: 1;
+    height: 3px;
+    background: var(--color-steel);
+    position: relative;
+    overflow: hidden;
+    /* Segmented look */
+    background: repeating-linear-gradient(
+      90deg,
+      var(--color-steel) 0px,
+      var(--color-steel) 6px,
+      transparent 6px,
+      transparent 8px
+    );
+  }
+
+  .preloader__progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: var(--color-orange);
+    transition: width 0.1s linear;
+    box-shadow: 0 0 10px var(--color-orange);
+  }
+
+  .preloader__percent {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-amber);
+    min-width: 36px;
+    text-align: right;
+  }
+
+  /* Glitch overlay when completing */
+  .preloader.glitch-out {
+    animation: preloaderGlitch 0.3s steps(2) forwards;
+  }
+
+  @keyframes preloaderGlitch {
+    0% { clip-path: inset(0 0 0 0); }
+    20% { clip-path: inset(10% 0 80% 0); filter: hue-rotate(90deg); }
+    40% { clip-path: inset(60% 0 10% 0); filter: hue-rotate(-90deg); }
+    60% { clip-path: inset(20% 0 50% 0); filter: hue-rotate(45deg); }
+    80% { clip-path: inset(80% 0 5% 0); filter: hue-rotate(-45deg); }
+    100% { clip-path: inset(0 0 0 0); filter: none; opacity: 0; }
+  }
+</style>
+
+<script>
+  function initPreloader() {
+    const preloader = document.getElementById('preloader');
+    if (!preloader) return;
+
+    const textEl = document.getElementById('preloader-text');
+    const bar = document.getElementById('preloader-bar');
+    const percent = document.getElementById('preloader-percent');
+    if (!textEl || !bar || !percent) return;
+
+    const lines = [
+      '> INITIALIZING SYSTEM...',
+      '> LOADING ASSETS...',
+      '> CALIBRATING SENSORS...',
+      '> ACCESS GRANTED'
+    ];
+
+    let progress = 0;
+    const totalDuration = 2800;
+    const lineInterval = totalDuration / lines.length;
+
+    // Create line elements
+    lines.forEach(() => {
+      const span = document.createElement('span');
+      span.className = 'line';
+      textEl.appendChild(span);
+    });
+    // Add cursor
+    const cursor = document.createElement('span');
+    cursor.className = 'cursor';
+    textEl.appendChild(cursor);
+
+    const lineEls = textEl.querySelectorAll('.line');
+
+    // Use GSAP for typewriter if available
+    const useGsap = typeof gsap !== 'undefined';
+
+    function typeLine(index: number) {
+      if (index >= lines.length) return;
+
+      const lineEl = lineEls[index] as HTMLElement;
+      if (!lineEl) return;
+      lineEl.classList.add('visible');
+      const text = lines[index];
+
+      if (useGsap) {
+        // GSAP-powered typewriter
+        const chars = text.split('');
+        lineEl.textContent = '';
+        const tl = gsap.timeline();
+        chars.forEach((char, i) => {
+          tl.call(() => {
+            lineEl.textContent = text.substring(0, i + 1);
+          }, [], i * 0.025);
+        });
+      } else {
+        // Fallback without GSAP
+        let charIdx = 0;
+        const typeChar = setInterval(() => {
+          if (charIdx < text.length) {
+            lineEl.textContent = text.substring(0, charIdx + 1);
+            charIdx++;
+          } else {
+            clearInterval(typeChar);
+          }
+        }, 25);
+      }
+
+      // Update progress
+      const targetProgress = ((index + 1) / lines.length) * 100;
+      const startProg = progress;
+      const startTime = Date.now();
+      const progDuration = lineInterval * 0.8;
+
+      const updateProg = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        const t = Math.min(elapsed / progDuration, 1);
+        progress = startProg + (targetProgress - startProg) * t;
+        bar.style.width = progress + '%';
+        percent.textContent = Math.round(progress) + '%';
+        if (t >= 1) clearInterval(updateProg);
+      }, 16);
+
+      setTimeout(() => typeLine(index + 1), lineInterval);
+    }
+
+    typeLine(0);
+
+    // Complete after all lines
+    setTimeout(() => {
+      bar.style.width = '100%';
+      percent.textContent = '100%';
+
+      setTimeout(() => {
+        preloader.classList.add('glitch-out');
+        setTimeout(() => {
+          preloader.classList.add('hidden');
+          document.body.style.overflow = '';
+          // Dispatch event for other components
+          window.dispatchEvent(new CustomEvent('preloader-done'));
+        }, 400);
+      }, 500);
+    }, totalDuration + 300);
+  }
+
+  // Block scroll during preloader
+  document.body.style.overflow = 'hidden';
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPreloader);
+  } else {
+    initPreloader();
+  }
+</script>

@@ -1,0 +1,428 @@
+---
+// Hero — Terminal diagnostic interface
+---
+
+<section class="hero" id="hero">
+  <!-- Background image with overlay -->
+  <div class="hero__bg">
+    <img
+      src="/Fotografía-rapero-de-espaldas-viendo-al-publico.jpg"
+      alt=""
+      class="hero__bg-img"
+      loading="eager"
+    />
+    <div class="hero__bg-overlay"></div>
+    <div class="hero__bg-scanlines" aria-hidden="true"></div>
+  </div>
+
+  <!-- HUD corners -->
+  <div class="hero__hud-coords hero__hud-coords--tl" aria-hidden="true">
+    LAT 20.6296° N / LON 87.0739° W
+  </div>
+  <div class="hero__hud-coords hero__hud-coords--tr" aria-hidden="true">
+    <span class="hero__rec">REC ●</span>
+  </div>
+
+  <!-- Main content -->
+  <div class="hero__content">
+    <h1 class="hero__title" id="hero-title">INNOVISION</h1>
+    <p class="hero__subtitle">&gt; CASA PRODUCTORA · QUINTANA ROO</p>
+    <p class="hero__tagline">Imagen cinematográfica sin filtros</p>
+
+    <a href="#work" class="hero__cta">
+      <span class="hero__cta-text">VER TRABAJO</span>
+      <span class="hero__cta-interference" aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="hero__scroll" aria-hidden="true">
+    <span class="hero__scroll-text">SCROLL TO DECODE</span>
+  </div>
+
+  <!-- Corner brackets decoration -->
+  <div class="hero__corner hero__corner--tl" aria-hidden="true"></div>
+  <div class="hero__corner hero__corner--tr" aria-hidden="true"></div>
+  <div class="hero__corner hero__corner--bl" aria-hidden="true"></div>
+  <div class="hero__corner hero__corner--br" aria-hidden="true"></div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* ── Background ── */
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero__bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(0.3) contrast(1.1);
+  }
+
+  .hero__bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 10, 10, 0.6);
+  }
+
+  .hero__bg-scanlines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.1) 2px,
+      rgba(0, 0, 0, 0.1) 4px
+    );
+    mix-blend-mode: overlay;
+    opacity: 0.15;
+    pointer-events: none;
+  }
+
+  /* ── HUD coordinates ── */
+  .hero__hud-coords {
+    position: absolute;
+    top: 100px;
+    z-index: 2;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--color-amber);
+    opacity: 0;
+    transition: opacity 1s ease 2.5s;
+  }
+
+  .hero.loaded .hero__hud-coords {
+    opacity: 1;
+  }
+
+  .hero__hud-coords--tl {
+    left: 40px;
+  }
+
+  .hero__hud-coords--tr {
+    right: 40px;
+  }
+
+  .hero__rec {
+    color: var(--color-red-neon);
+    animation: recBlink 1.5s ease infinite;
+    text-shadow: 0 0 8px var(--color-red-neon);
+  }
+
+  /* ── Content ── */
+  .hero__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(60px, 12vw, 180px);
+    font-weight: 400;
+    color: #fff;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    animation: glitchColor 6s ease infinite;
+    position: relative;
+  }
+
+  .hero__title::before,
+  .hero__title::after {
+    content: 'INNOVISION';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .hero__title::before {
+    color: var(--color-red-neon);
+    animation: glitchColor 6s ease infinite;
+    clip-path: inset(0 0 65% 0);
+    opacity: 0.4;
+  }
+
+  .hero__title::after {
+    color: var(--color-blue-neon);
+    animation: glitchColor 6s ease infinite reverse;
+    clip-path: inset(65% 0 0 0);
+    opacity: 0.4;
+  }
+
+  .hero__subtitle {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    color: var(--color-white-static);
+    margin-top: 24px;
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  .hero.loaded .hero__subtitle {
+    transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hero__tagline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 24px);
+    color: var(--color-orange);
+    margin-top: 12px;
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  .hero.loaded .hero__tagline {
+    transition: opacity 0.8s ease 0.5s, transform 0.8s ease 0.5s;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── CTA Button ── */
+  .hero__cta {
+    display: inline-block;
+    margin-top: 48px;
+    padding: 14px 40px;
+    border: 1px solid var(--color-orange);
+    background: transparent;
+    color: var(--color-orange);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    clip-path: polygon(
+      12px 0%, calc(100% - 12px) 0%,
+      100% 12px, 100% calc(100% - 12px),
+      calc(100% - 12px) 100%, 12px 100%,
+      0% calc(100% - 12px), 0% 12px
+    );
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  .hero.loaded .hero__cta {
+    transition: opacity 0.8s ease 0.7s, transform 0.8s ease 0.7s, background 0.3s ease, color 0.3s ease;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hero__cta:hover {
+    background: var(--color-orange);
+    color: var(--color-void);
+  }
+
+  .hero__cta-text {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero__cta-interference {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 1px,
+      rgba(255, 255, 255, 0.1) 1px,
+      rgba(255, 255, 255, 0.1) 2px
+    );
+    transition: none;
+    pointer-events: none;
+  }
+
+  .hero__cta:hover .hero__cta-interference {
+    animation: interferenceSweep 0.4s linear;
+  }
+
+  @keyframes interferenceSweep {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+
+  /* ── Scroll indicator ── */
+  .hero__scroll {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    z-index: 2;
+    opacity: 0;
+  }
+
+  .hero.loaded .hero__scroll {
+    transition: opacity 1s ease 1.2s;
+    opacity: 1;
+  }
+
+  .hero__scroll-text {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--color-white-static);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    opacity: 0.5;
+  }
+
+  /* ── Corner brackets ── */
+  .hero__corner {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    z-index: 2;
+    opacity: 0;
+  }
+
+  .hero.loaded .hero__corner {
+    transition: opacity 0.6s ease 0.8s;
+    opacity: 0.4;
+  }
+
+  .hero__corner--tl {
+    top: 30px;
+    left: 30px;
+    border-top: 1px solid var(--color-orange);
+    border-left: 1px solid var(--color-orange);
+  }
+
+  .hero__corner--tr {
+    top: 30px;
+    right: 30px;
+    border-top: 1px solid var(--color-orange);
+    border-right: 1px solid var(--color-orange);
+  }
+
+  .hero__corner--bl {
+    bottom: 30px;
+    left: 30px;
+    border-bottom: 1px solid var(--color-orange);
+    border-left: 1px solid var(--color-orange);
+  }
+
+  .hero__corner--br {
+    bottom: 30px;
+    right: 30px;
+    border-bottom: 1px solid var(--color-orange);
+    border-right: 1px solid var(--color-orange);
+  }
+
+  @media (max-width: 768px) {
+    .hero__hud-coords {
+      font-size: 8px;
+    }
+    .hero__hud-coords--tl {
+      left: 20px;
+      top: 80px;
+    }
+    .hero__hud-coords--tr {
+      right: 20px;
+      top: 80px;
+    }
+    .hero__scroll {
+      right: 20px;
+      bottom: 20px;
+    }
+    .hero__corner {
+      width: 20px;
+      height: 20px;
+    }
+    .hero__corner--tl { top: 20px; left: 20px; }
+    .hero__corner--tr { top: 20px; right: 20px; }
+    .hero__corner--bl { bottom: 20px; left: 20px; }
+    .hero__corner--br { bottom: 20px; right: 20px; }
+  }
+</style>
+
+<script>
+  function initHero() {
+    const hero = document.getElementById('hero');
+    if (!hero) return;
+
+    // Trigger loaded state after preloader
+    const showHero = () => {
+      hero.classList.add('loaded');
+    };
+
+    window.addEventListener('preloader-done', showHero);
+    // Fallback: if preloader is already gone
+    setTimeout(showHero, 4000);
+
+    // Subtle GSAP glitch on title
+    if (typeof gsap !== 'undefined') {
+      const title = document.getElementById('hero-title');
+      if (title) {
+        function triggerGlitch() {
+          const tl = gsap.timeline({
+            onComplete: () => {
+              // Random next glitch in 4-10 seconds
+              setTimeout(triggerGlitch, 4000 + Math.random() * 6000);
+            }
+          });
+
+          tl.to(title, {
+            x: gsap.utils.random(-3, 3),
+            duration: 0.05,
+          })
+          .to(title, {
+            x: gsap.utils.random(-2, 2),
+            duration: 0.05,
+          })
+          .to(title, {
+            x: 0,
+            duration: 0.05,
+          })
+          .to(title, {
+            textShadow: `-2px 0 #FF1B3D, 2px 0 #00D4FF`,
+            duration: 0.05,
+          })
+          .to(title, {
+            textShadow: `2px 0 #FF1B3D, -2px 0 #00D4FF`,
+            duration: 0.05,
+          })
+          .to(title, {
+            textShadow: 'none',
+            duration: 0.1,
+          });
+        }
+
+        setTimeout(triggerGlitch, 3000);
+      }
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHero);
+  } else {
+    initHero();
+  }
+</script>

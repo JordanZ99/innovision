@@ -1,0 +1,211 @@
+---
+// Manifesto — Digital Sovereignty terminal
+---
+
+<section class="manifesto section-pad" id="manifesto">
+  <div class="manifesto__terminal reveal">
+    <!-- Terminal bar -->
+    <div class="manifesto__bar">
+      <span class="manifesto__dot manifesto__dot--red"></span>
+      <span class="manifesto__dot manifesto__dot--yellow"></span>
+      <span class="manifesto__dot manifesto__dot--green"></span>
+      <span class="manifesto__bar-title">DIAGNOSTIC.EXE</span>
+    </div>
+
+    <!-- Terminal body -->
+    <div class="manifesto__body">
+      <div class="manifesto__header">
+        <span class="manifesto__prompt">&gt; RUNNING FULL SYSTEM SCAN...</span>
+        <span class="manifesto__cursor">_</span>
+      </div>
+
+      <div class="manifesto__text">
+        <p class="manifesto__paragraph" data-reveal>
+          Creemos en la <em>soberanía de la imagen</em>. En un mundo saturado de algoritmos y contenido descartable, producimos piezas que no piden permiso.
+        </p>
+        <p class="manifesto__paragraph" data-reveal>
+          Cada frame es una declaración. Cada corte, una decisión deliberada. No seguimos tendencias — <em>las documentamos desde adentro</em>.
+        </p>
+        <p class="manifesto__paragraph" data-reveal>
+          Nacimos en Quintana Roo, pero nuestro lenguaje es universal: <em>la calle habla a través de la lente</em>. Hip-hop, reggaetón, cultura urbana — filtrada sin filtros.
+        </p>
+        <p class="manifesto__paragraph" data-reveal>
+          <em>Somos soberanos de nuestra narrativa.</em> Producción cinematográfica que no negocia su integridad.
+        </p>
+      </div>
+
+      <div class="manifesto__footer-text">
+        <span class="manifesto__prompt manifesto__prompt--green">&gt; SCAN COMPLETE. INTEGRITY: 100%</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .manifesto {
+    background: var(--color-concrete);
+    position: relative;
+  }
+
+  .manifesto::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.04) 2px,
+      rgba(0, 0, 0, 0.04) 4px
+    );
+    pointer-events: none;
+  }
+
+  .manifesto__terminal {
+    max-width: 800px;
+    margin: 0 auto;
+    border: 1px solid var(--color-steel);
+    background: var(--color-void);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Terminal bar ── */
+  .manifesto__bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-steel);
+    background: var(--color-concrete);
+  }
+
+  .manifesto__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .manifesto__dot--red { background: var(--color-red-neon); }
+  .manifesto__dot--yellow { background: var(--color-amber); }
+  .manifesto__dot--green { background: var(--color-green-neon); }
+
+  .manifesto__bar-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--color-steel);
+    margin-left: 12px;
+    text-transform: uppercase;
+  }
+
+  /* ── Terminal body ── */
+  .manifesto__body {
+    padding: 40px;
+  }
+
+  .manifesto__header {
+    margin-bottom: 40px;
+  }
+
+  .manifesto__prompt {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-green-neon);
+    letter-spacing: 0.05em;
+  }
+
+  .manifesto__prompt--green {
+    color: var(--color-green-neon);
+  }
+
+  .manifesto__cursor {
+    display: inline-block;
+    color: var(--color-green-neon);
+    animation: cursorBlink 0.7s step-end infinite;
+    margin-left: 2px;
+  }
+
+  /* ── Manifesto text ── */
+  .manifesto__paragraph {
+    font-family: var(--font-serif);
+    font-size: clamp(18px, 2.5vw, 28px);
+    line-height: 1.6;
+    color: var(--color-white-static);
+    margin-bottom: 32px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+  }
+
+  .manifesto__paragraph.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .manifesto__paragraph em {
+    color: var(--color-orange);
+    font-style: italic;
+  }
+
+  /* ── Footer text ── */
+  .manifesto__footer-text {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-steel);
+  }
+
+  @media (max-width: 768px) {
+    .manifesto__body {
+      padding: 24px;
+    }
+  }
+</style>
+
+<script>
+  function initManifesto() {
+    // IntersectionObserver for paragraphs
+    const paragraphs = document.querySelectorAll('.manifesto__paragraph');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Stagger the reveal
+            const delay = Array.from(paragraphs).indexOf(entry.target) * 200;
+            setTimeout(() => {
+              entry.target.classList.add('revealed');
+            }, delay);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    paragraphs.forEach((p) => observer.observe(p));
+
+    // Reveal terminal wrapper
+    const terminal = document.querySelector('.manifesto__terminal');
+    if (terminal) {
+      const termObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              termObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      termObserver.observe(terminal);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initManifesto);
+  } else {
+    initManifesto();
+  }
+</script>

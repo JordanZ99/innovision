@@ -1,0 +1,267 @@
+---
+// Nav — Fixed HUD-style navigation
+---
+
+<nav class="nav" id="main-nav">
+  <div class="nav__inner">
+    <a href="#" class="nav__logo" aria-label="INNOVISION Home">
+      <img src="/logo.png" alt="INNOVISION" width="32" height="32" />
+    </a>
+
+    <div class="nav__links" id="nav-links">
+      <a href="#work" class="nav__link" data-text="WORK">WORK</a>
+      <span class="nav__separator">/</span>
+      <a href="#about" class="nav__link" data-text="ABOUT">ABOUT</a>
+      <span class="nav__separator">/</span>
+      <a href="#manifesto" class="nav__link" data-text="MANIFESTO">MANIFESTO</a>
+      <span class="nav__separator">/</span>
+      <a href="#services" class="nav__link" data-text="SERVICES">SERVICES</a>
+      <span class="nav__separator">/</span>
+      <a href="#contact" class="nav__link" data-text="CONTACT">CONTACT</a>
+    </div>
+
+    <div class="nav__status">
+      <span class="nav__status-dot"></span>
+      <span class="nav__status-text">SYSTEM: ONLINE</span>
+    </div>
+
+    <!-- Mobile menu toggle -->
+    <button class="nav__mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000;
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-steel);
+    transform: translateY(-100%);
+    transition: transform 0.5s var(--ease-out-expo);
+  }
+
+  .nav.visible {
+    transform: translateY(0);
+  }
+
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 40px;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
+  .nav__logo img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .nav__links {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .nav__link {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-white-static);
+    text-transform: uppercase;
+    position: relative;
+    padding: 4px 8px;
+    transition: color 0.3s ease;
+    overflow: hidden;
+  }
+
+  .nav__link::before,
+  .nav__link::after {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-orange);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s var(--ease-out-expo);
+    font-weight: 400;
+  }
+
+  .nav__link::before {
+    content: '[';
+    left: -4px;
+    transform: translateY(-50%) translateX(10px);
+  }
+
+  .nav__link::after {
+    content: ']';
+    right: -4px;
+    transform: translateY(-50%) translateX(-10px);
+  }
+
+  .nav__link:hover {
+    color: var(--color-orange);
+  }
+
+  .nav__link:hover::before {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+
+  .nav__link:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+
+  .nav__separator {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-steel);
+    user-select: none;
+  }
+
+  .nav__status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav__status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-green-neon);
+    animation: blink 2s ease infinite;
+    box-shadow: 0 0 6px var(--color-green-neon);
+  }
+
+  .nav__status-text {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-green-neon);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .nav__mobile-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .nav__mobile-toggle span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--color-white-static);
+    transition: all 0.3s ease;
+  }
+
+  @media (max-width: 900px) {
+    .nav__links,
+    .nav__status {
+      display: none;
+    }
+
+    .nav__mobile-toggle {
+      display: flex;
+    }
+
+    .nav__links.open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(12px);
+      padding: 20px 40px;
+      border-bottom: 1px solid var(--color-steel);
+      gap: 12px;
+    }
+
+    .nav__links.open .nav__separator {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  function initNav() {
+    const nav = document.getElementById('main-nav');
+    const toggle = document.getElementById('mobile-toggle');
+    const links = document.getElementById('nav-links');
+    if (!nav) return;
+
+    let ticking = false;
+    let lastScroll = 0;
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          if (scrollY > 100) {
+            nav.classList.add('visible');
+          } else {
+            nav.classList.remove('visible');
+          }
+          lastScroll = scrollY;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Mobile toggle
+    if (toggle && links) {
+      toggle.addEventListener('click', () => {
+        links.classList.toggle('open');
+      });
+
+      // Close on link click
+      links.querySelectorAll('.nav__link').forEach(link => {
+        link.addEventListener('click', () => {
+          links.classList.remove('open');
+        });
+      });
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector((anchor as HTMLAnchorElement).getAttribute('href') || '');
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNav);
+  } else {
+    initNav();
+  }
+</script>
