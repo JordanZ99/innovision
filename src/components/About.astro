@@ -1,64 +1,125 @@
 ---
-// About — Split layout: image left / text right
+// About — "Escaneo de Identidad" — clean rewrite
+// 60/40 split: video HUD left, minimal text right
+// Video state: single source of truth via <video> element properties
 ---
 
 <section class="about section-pad" id="about">
   <div class="about__inner">
-    <!-- Image side -->
-    <div class="about__image-wrap reveal">
-      <div class="about__image-frame">
-        <div class="about__image-corner about__image-corner--tl" aria-hidden="true"></div>
-        <div class="about__image-corner about__image-corner--tr" aria-hidden="true"></div>
-        <div class="about__image-corner about__image-corner--bl" aria-hidden="true"></div>
-        <div class="about__image-corner about__image-corner--br" aria-hidden="true"></div>
-        <img
-          src="/Fotografia-Raperos-contrapicado.jpg"
-          alt="INNOVISION — Casa productora cinematográfica"
-          class="about__image"
-          loading="lazy"
-        />
-        <div class="about__image-overlay"></div>
+
+    <!-- ═══ Video HUD side (60%) ═══ -->
+    <div class="about__video-wrap">
+      <div class="about__video-frame" id="about-video-frame">
+        <!-- HUD corner brackets -->
+        <div class="about__hud-corner about__hud-corner--tl" aria-hidden="true"></div>
+        <div class="about__hud-corner about__hud-corner--tr" aria-hidden="true"></div>
+        <div class="about__hud-corner about__hud-corner--bl" aria-hidden="true"></div>
+        <div class="about__hud-corner about__hud-corner--br" aria-hidden="true"></div>
+
+        <!-- Timecode badge (top-left) — driven by video.timeupdate -->
+        <div class="about__timecode" id="about-timecode" aria-hidden="true">
+          <span class="about__timecode-label">TC</span>
+          <span class="about__timecode-value" id="about-timecode-value">00:00:00:00</span>
+        </div>
+
+        <!-- Static noise overlay (brief flash on section entry) -->
+        <div class="about__static" id="about-static" aria-hidden="true"></div>
+
+        <!-- Gradient overlay -->
+        <div class="about__video-overlay"></div>
+
+        <!-- Video — single state: starts muted + loop for silent preview -->
+        <video
+          id="about-video"
+          src="/VideoInnovision.mp4"
+          class="about__video"
+          muted
+          loop
+          playsinline
+          preload="auto"
+        ></video>
+
+        <!-- Play/Pause toggle — visible on hover over video frame -->
+        <button class="about__play-btn" id="about-play-btn" aria-label="Play video">
+          <div class="about__play-ring">
+            <svg class="about__play-icon about__play-icon--play" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="6,3 20,12 6,21"/>
+            </svg>
+            <svg class="about__play-icon about__play-icon--pause" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" style="display:none;">
+              <rect x="5" y="3" width="4" height="18"/>
+              <rect x="15" y="3" width="4" height="18"/>
+            </svg>
+          </div>
+          <span class="about__play-label" id="about-play-label">CLICK TO PLAY · AUDIO ON</span>
+        </button>
       </div>
-      <div class="about__image-label">
+
+      <!-- Progress bar for seeking -->
+      <div class="about__progress" id="about-progress">
+        <div class="about__progress-bar" id="about-progress-bar"></div>
+        <div class="about__progress-hover" id="about-progress-hover"></div>
+        <div class="about__progress-thumb" id="about-progress-thumb"></div>
+      </div>
+
+      <!-- Bottom label bar — STATUS driven by video events -->
+      <div class="about__video-label">
         <span>SYS_MODULE: INO_VISUAL_CORE</span>
-        <span>STATUS: ACTIVE</span>
+        <span class="about__label-status">
+          STATUS: <span id="about-status-value">STANDBY</span>
+        </span>
       </div>
     </div>
 
-    <!-- Text side -->
+    <!-- ═══ Text side (40%) ═══ -->
     <div class="about__text">
-      <div class="about__header reveal">
-        <span class="about__tag" data-i18n="about.tag">&gt; SYSTEM_INFO</span>
-        <h2 class="about__title" data-i18n="about.title">QUIÉNES SOMOS</h2>
+      <div class="about__header">
+        <span class="about__tag" id="about-tag">&gt; INFO_DEL_SISTEMA</span>
+        <h2 class="about__title" id="about-title">QUIÉNES SOMOS</h2>
       </div>
 
-      <div class="about__content reveal">
-        <p class="about__paragraph" data-i18n-html="about.p1">
-          <span class="about__bullet" aria-hidden="true">▸</span>
-          Innovision nace en Quintana Roo como una casa productora que entiende el lenguaje de la calle y lo traduce en imagen cinematográfica de alto impacto.
-        </p>
-        <p class="about__paragraph" data-i18n-html="about.p2">
-          <span class="about__bullet" aria-hidden="true">▸</span>
-          Nos especializamos en video musical urbano — hip-hop, reggaetón y toda la cultura que late en las calles del Caribe mexicano.
-        </p>
-        <p class="about__paragraph" data-i18n-html="about.p3">
-          <span class="about__bullet" aria-hidden="true">▸</span>
-          Producciones comerciales, brand films y videoclips con una estética cruda, sin filtros, que no pide permiso.
-        </p>
-        <p class="about__paragraph" data-i18n-html="about.p4">
-          <span class="about__bullet" aria-hidden="true">▸</span>
-          Cada proyecto es un sistema diagnóstico: analizamos, planificamos y ejecutamos con precisión técnica y visión creativa sin límites.
-        </p>
-      </div>
+      <p class="about__tagline" id="about-tagline" data-i18n="about.tagline">
+        Traducimos la calle en imagen.
+      </p>
 
-      <div class="about__footer reveal">
-        <div class="about__stat-line">
-          <span class="about__stat-label" data-i18n="about.uptime_label">UPTIME:</span>
-          <span class="about__stat-value" data-i18n="about.uptime_value">5+ AÑOS CONTINUOS</span>
+      <p class="about__description" id="about-desc" data-i18n="about.description">
+        Casa productora cinematográfica en Playa del Carmen. Video musical urbano, comerciales y brand films con una estética cruda que no pide permiso.
+      </p>
+
+      <!-- Credentials chips -->
+      <div class="about__credentials" id="about-credentials">
+        <div class="about__chip">
+          <span class="about__chip-dot"></span>
+          <span class="about__chip-name">INSTAGRAM</span>
+          <span class="about__chip-status">CONNECTED</span>
         </div>
-        <div class="about__stat-line">
-          <span class="about__stat-label" data-i18n="about.base_label">BASE:</span>
-          <span class="about__stat-value" data-i18n="about.base_value">CANCÚN, QUINTANA ROO</span>
+        <div class="about__chip">
+          <span class="about__chip-dot"></span>
+          <span class="about__chip-name">YOUTUBE</span>
+          <span class="about__chip-status">CONNECTED</span>
+        </div>
+        <div class="about__chip">
+          <span class="about__chip-dot"></span>
+          <span class="about__chip-name">SPOTIFY</span>
+          <span class="about__chip-status">CONNECTED</span>
+        </div>
+      </div>
+
+      <!-- Specs panel -->
+      <div class="about__specs" id="about-specs">
+        <div class="about__spec-row">
+          <span class="about__spec-label">UPTIME</span>
+          <span class="about__spec-dots"></span>
+          <span class="about__spec-value">5+ AÑOS</span>
+        </div>
+        <div class="about__spec-row">
+          <span class="about__spec-label">BASE</span>
+          <span class="about__spec-dots"></span>
+          <span class="about__spec-value">PLAYA DEL CARMEN, QR</span>
+        </div>
+        <div class="about__spec-row">
+          <span class="about__spec-label">SECTOR</span>
+          <span class="about__spec-dots"></span>
+          <span class="about__spec-value">VIDEO MUSICAL URBANO</span>
         </div>
       </div>
     </div>
@@ -71,83 +132,257 @@
     position: relative;
   }
 
-  .about__image-wrap,
-  .about__text {
-    position: relative;
-    z-index: 2;
-  }
-
   .about__inner {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    grid-template-columns: 3fr 2fr;
+    gap: 48px;
     align-items: center;
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
   }
 
-  /* ── Image side ── */
-  .about__image-frame {
+  /* ═══════════════════════════════
+     VIDEO HUD SIDE
+     ═══════════════════════════════ */
+  .about__video-wrap {
     position: relative;
-    border: 2px solid var(--color-steel);
+  }
+
+  .about__video-frame {
+    position: relative;
+    border: 1px solid var(--color-steel);
     overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background: #000;
   }
 
-  .about__image {
+  .about__video {
     width: 100%;
-    aspect-ratio: 4 / 5;
+    height: 100%;
     object-fit: cover;
-    filter: grayscale(0.3) contrast(1.1);
     display: block;
+    filter: grayscale(0.2) contrast(1.1);
   }
 
-  .about__image-overlay {
+  .about__video-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      180deg,
-      transparent 60%,
-      rgba(10, 10, 10, 0.5)
-    );
+    background: linear-gradient(180deg, transparent 60%, rgba(10, 10, 10, 0.4));
     pointer-events: none;
+    z-index: 1;
   }
 
-  .about__image-corner {
+  /* ── HUD Corners ── */
+  .about__hud-corner {
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
+    z-index: 4;
+  }
+
+  .about__hud-corner--tl {
+    top: -1px; left: -1px;
+    border-top: 2px solid var(--color-orange);
+    border-left: 2px solid var(--color-orange);
+  }
+  .about__hud-corner--tr {
+    top: -1px; right: -1px;
+    border-top: 2px solid var(--color-orange);
+    border-right: 2px solid var(--color-orange);
+  }
+  .about__hud-corner--bl {
+    bottom: -1px; left: -1px;
+    border-bottom: 2px solid var(--color-orange);
+    border-left: 2px solid var(--color-orange);
+  }
+  .about__hud-corner--br {
+    bottom: -1px; right: -1px;
+    border-bottom: 2px solid var(--color-orange);
+    border-right: 2px solid var(--color-orange);
+  }
+
+  /* ── Timecode ── */
+  .about__timecode {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 5;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .about__timecode-label {
+    color: var(--color-red-neon);
+    font-weight: 700;
+    font-size: 9px;
+    background: rgba(255, 27, 61, 0.15);
+    padding: 2px 5px;
+    border: 1px solid rgba(255, 27, 61, 0.3);
+  }
+
+  .about__timecode-value {
+    color: var(--color-white-static);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Static noise overlay ── */
+  .about__static {
+    position: absolute;
+    inset: 0;
+    z-index: 6;
+    opacity: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.8'/%3E%3C/svg%3E");
+    background-size: 128px 128px;
+    mix-blend-mode: overlay;
+  }
+
+  .about__static.flash {
+    animation: staticFlash 0.3s ease-out;
+  }
+
+  @keyframes staticFlash {
+    0%   { opacity: 0.9; background-color: rgba(255, 255, 255, 0.4); }
+    20%  { opacity: 0.7; background-color: rgba(0, 0, 0, 0.6); }
+    40%  { opacity: 0.8; background-color: rgba(255, 255, 255, 0.3); }
+    60%  { opacity: 0.4; background-color: transparent; }
+    100% { opacity: 0; background-color: transparent; }
+  }
+
+  /* ── Play/Pause Button ── */
+  .about__play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  /* Show play/pause button only when hovering the video frame */
+  .about__video-frame:hover .about__play-btn,
+  .about__video-frame.show-controls .about__play-btn {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+
+
+  .about__play-ring {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 2px solid var(--color-orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10, 10, 10, 0.6);
+    transition: transform 0.3s var(--ease-out-expo), background 0.3s ease;
+    box-shadow: 0 0 20px rgba(255, 77, 0, 0.3);
+  }
+
+  .about__play-btn:hover .about__play-ring {
+    transform: scale(1.1);
+    background: rgba(255, 77, 0, 0.2);
+    box-shadow: 0 0 30px rgba(255, 77, 0, 0.5);
+  }
+
+  .about__play-icon {
+    color: var(--color-orange);
+  }
+
+  .about__play-icon--play {
+    margin-left: 3px;
+  }
+
+  .about__play-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--color-white-static);
+    opacity: 0.7;
+    text-transform: uppercase;
+    white-space: nowrap;
+    animation: playLabelPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes playLabelPulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 0.3; }
+  }
+
+  /* ── Progress bar ── */
+  .about__progress {
+    position: relative;
+    height: 4px;
+    background: var(--color-steel);
+    cursor: pointer;
+    margin-top: 0;
+    border: 1px solid var(--color-steel);
+    border-top: none;
+  }
+
+  .about__progress-bar {
+    height: 100%;
+    background: var(--color-orange);
+    width: 0%;
+    transition: none;
+    position: relative;
     z-index: 2;
   }
 
-  .about__image-corner--tl {
-    top: -1px;
-    left: -1px;
-    border-top: 2px solid var(--color-orange);
-    border-left: 2px solid var(--color-orange);
+  .about__progress-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: rgba(255, 77, 0, 0.25);
+    width: 0%;
+    z-index: 1;
+    pointer-events: none;
   }
 
-  .about__image-corner--tr {
-    top: -1px;
-    right: -1px;
-    border-top: 2px solid var(--color-orange);
-    border-right: 2px solid var(--color-orange);
+  .about__progress-thumb {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    width: 12px;
+    height: 12px;
+    background: var(--color-orange);
+    border: 2px solid var(--color-void);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    pointer-events: none;
   }
 
-  .about__image-corner--bl {
-    bottom: -1px;
-    left: -1px;
-    border-bottom: 2px solid var(--color-orange);
-    border-left: 2px solid var(--color-orange);
+  .about__progress:hover .about__progress-thumb {
+    opacity: 1;
   }
 
-  .about__image-corner--br {
-    bottom: -1px;
-    right: -1px;
-    border-bottom: 2px solid var(--color-orange);
-    border-right: 2px solid var(--color-orange);
+  .about__progress:hover {
+    height: 6px;
   }
 
-  .about__image-label {
+  /* ── Bottom label bar ── */
+  .about__video-label {
     display: flex;
     justify-content: space-between;
     padding: 8px 12px;
@@ -160,7 +395,22 @@
     text-transform: uppercase;
   }
 
-  /* ── Text side ── */
+  .about__label-status {
+    color: var(--color-steel);
+  }
+
+  #about-status-value {
+    color: var(--color-green-neon);
+  }
+
+  /* ═══════════════════════════════
+     TEXT SIDE
+     ═══════════════════════════════ */
+  .about__text {
+    position: relative;
+    z-index: 2;
+  }
+
   .about__header {
     margin-bottom: 32px;
   }
@@ -172,82 +422,435 @@
     letter-spacing: 0.1em;
     display: block;
     margin-bottom: 12px;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid var(--color-green-neon);
+    width: 0;
+  }
+
+  .about__tag.typing {
+    animation: typewriter 0.8s steps(20, end) forwards,
+               cursorBlink 0.6s step-end infinite;
+  }
+
+  @keyframes typewriter {
+    from { width: 0; }
+    to { width: 21ch; }
   }
 
   .about__title {
     font-family: var(--font-display);
-    font-size: clamp(28px, 4vw, 48px);
+    font-size: clamp(32px, 4.5vw, 56px);
     font-weight: 400;
     color: var(--color-white-static);
     letter-spacing: 0.05em;
     text-transform: uppercase;
+    line-height: 1.05;
+    clip-path: inset(0 100% 0 0);
   }
 
-  .about__content {
-    margin-bottom: 40px;
+  .about__title.revealing {
+    animation: clipReveal 0.8s var(--ease-out-expo) forwards;
   }
 
-  .about__paragraph {
+  @keyframes clipReveal {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0 0% 0 0); }
+  }
+
+  .about__tagline {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2.5vw, 28px);
+    color: var(--color-orange);
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    text-transform: uppercase;
+  }
+
+  .about__tagline.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .about__description {
     font-family: var(--font-mono);
     font-size: 13px;
     line-height: 1.8;
     color: var(--color-white-static);
-    margin-bottom: 20px;
-    opacity: 0.85;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;
+    max-width: 380px;
+    margin-bottom: 28px;
   }
 
-  .about__bullet {
-    color: var(--color-orange);
-    margin-right: 8px;
+  .about__description.visible {
+    opacity: 0.8;
+    transform: translateY(0);
   }
 
-  .about__footer {
-    border-top: 1px solid var(--color-steel);
-    padding-top: 20px;
-  }
-
-  .about__stat-line {
+  /* ── Credentials chips ── */
+  .about__credentials {
     display: flex;
-    gap: 12px;
-    margin-bottom: 8px;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+  }
+
+  .about__credentials.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .about__chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border: 1px solid var(--color-steel);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--color-steel);
+    text-transform: uppercase;
+    background: var(--color-concrete);
+    transition: border-color 0.3s ease;
+  }
+
+  .about__chip:hover {
+    border-color: var(--color-green-neon);
+  }
+
+  .about__chip-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-green-neon);
+    animation: chipBlink 1.5s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  .about__chip:nth-child(2) .about__chip-dot { animation-delay: 0.3s; }
+  .about__chip:nth-child(3) .about__chip-dot { animation-delay: 0.6s; }
+
+  @keyframes chipBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+  }
+
+  .about__chip-name {
+    color: var(--color-white-static);
+    opacity: 0.8;
+  }
+
+  .about__chip-status {
+    color: var(--color-green-neon);
+    font-size: 8px;
+  }
+
+  /* ── Specs panel ── */
+  .about__specs {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;
+  }
+
+  .about__specs.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .about__spec-row {
+    display: flex;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(46, 46, 46, 0.5);
     font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
 
-  .about__stat-label {
+  .about__spec-row:last-child {
+    border-bottom: none;
+  }
+
+  .about__spec-label {
     color: var(--color-steel);
-    min-width: 60px;
+    min-width: 64px;
+    flex-shrink: 0;
   }
 
-  .about__stat-value {
+  .about__spec-dots {
+    flex: 1;
+    border-bottom: 1px dotted var(--color-steel);
+    margin: 0 10px;
+    min-width: 16px;
+    align-self: center;
+    margin-bottom: 3px;
+  }
+
+  .about__spec-value {
     color: var(--color-amber);
+    white-space: nowrap;
+    transition: color 0.3s ease;
   }
 
+  .about__spec-row:hover .about__spec-value {
+    color: var(--color-orange);
+  }
+
+  .about__spec-row:hover .about__spec-label {
+    color: var(--color-white-static);
+  }
+
+  /* ═══════════════════════════════
+     RESPONSIVE
+     ═══════════════════════════════ */
   @media (max-width: 900px) {
     .about__inner {
       grid-template-columns: 1fr;
-      gap: 40px;
+      gap: 36px;
+    }
+
+    .about__play-ring {
+      width: 52px;
+      height: 52px;
+    }
+
+    .about__play-icon {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .about__video-label {
+      flex-direction: column;
+      gap: 4px;
+      align-items: flex-start;
+    }
+
+    .about__credentials {
+      gap: 6px;
+    }
+
+    .about__chip {
+      font-size: 8px;
+      padding: 4px 8px;
+    }
+
+    .about__spec-value {
+      font-size: 10px;
     }
   }
 </style>
 
 <script>
   function initAbout() {
-    const reveals = document.querySelectorAll('.about .reveal');
+    const section = document.getElementById('about');
+    if (!section) return;
+
+    const tag = document.getElementById('about-tag') as HTMLElement;
+    const title = document.getElementById('about-title') as HTMLElement;
+    const tagline = document.getElementById('about-tagline') as HTMLElement;
+    const desc = document.getElementById('about-desc') as HTMLElement;
+    const credentials = document.getElementById('about-credentials') as HTMLElement;
+    const specs = document.getElementById('about-specs') as HTMLElement;
+    const staticOverlay = document.getElementById('about-static') as HTMLElement;
+    const timecodeValue = document.getElementById('about-timecode-value') as HTMLElement;
+    const statusValue = document.getElementById('about-status-value') as HTMLElement;
+    const video = document.getElementById('about-video') as HTMLVideoElement;
+    const playBtn = document.getElementById('about-play-btn') as HTMLElement;
+    const playIcon = playBtn.querySelector('.about__play-icon--play') as HTMLElement;
+    const pauseIcon = playBtn.querySelector('.about__play-icon--pause') as HTMLElement;
+    const playLabel = document.getElementById('about-play-label') as HTMLElement;
+    const progressBar = document.getElementById('about-progress-bar') as HTMLElement;
+    const progressHover = document.getElementById('about-progress-hover') as HTMLElement;
+    const progressThumb = document.getElementById('about-progress-thumb') as HTMLElement;
+    const progressContainer = document.getElementById('about-progress') as HTMLElement;
+    const videoFrame = document.getElementById('about-video-frame') as HTMLElement;
+
+    // ── Single-fire flag for entry animations ──
+    let hasAnimated = false;
+
+
+
+    // ── STATUS text: driven by video events, reads video properties ──
+    function syncStatus() {
+      if (video.muted) {
+        statusValue.textContent = 'STANDBY';
+        statusValue.style.color = 'var(--color-amber)';
+      } else {
+        statusValue.textContent = video.paused ? 'PAUSED' : 'LIVE';
+        statusValue.style.color = video.paused
+          ? 'var(--color-steel)'
+          : 'var(--color-green-neon)';
+      }
+    }
+
+    video.addEventListener('play', syncStatus);
+    video.addEventListener('pause', syncStatus);
+    video.addEventListener('volumechange', syncStatus);
+
+    // ── Play/Pause toggle: single source of truth = video.paused ──
+    function updatePlayPauseUI() {
+      if (video.paused || video.muted) {
+        playIcon.style.display = '';
+        pauseIcon.style.display = 'none';
+        playLabel.textContent = 'CLICK TO PLAY · AUDIO ON';
+      } else {
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = '';
+        playLabel.textContent = '';
+      }
+      syncStatus();
+    }
+
+    playBtn.addEventListener('click', () => {
+      if (video.paused || video.muted) {
+        // Activate: unmute, remove loop, continue from current position, play
+        video.muted = false;
+        video.removeAttribute('loop');
+        video.play().catch(() => {});
+      } else {
+        // Pause
+        video.pause();
+      }
+    });
+
+    // ── Hover: show controls only when mouse is over the video frame ──
+    videoFrame.addEventListener('mouseenter', () => {
+      videoFrame.classList.add('show-controls');
+    });
+    videoFrame.addEventListener('mouseleave', () => {
+      videoFrame.classList.remove('show-controls');
+    });
+
+    // ── Timecode + Progress: driven by video.timeupdate ──
+    video.addEventListener('timeupdate', () => {
+      // Timecode from video.currentTime
+      const t = video.currentTime;
+      const totalFrames = Math.floor(t * 24);
+      const frames = totalFrames % 24;
+      const totalSec = Math.floor(t);
+      const sec = totalSec % 60;
+      const totalMin = Math.floor(totalSec / 60);
+      const min = totalMin % 60;
+      const hr = Math.floor(totalMin / 60);
+      const pad = (n: number) => String(n).padStart(2, '0');
+      timecodeValue.textContent = `${pad(hr)}:${pad(min)}:${pad(sec)}:${pad(frames)}`;
+
+      // Progress bar position
+      if (video.duration) {
+        const pct = (video.currentTime / video.duration) * 100;
+        progressBar.style.width = pct + '%';
+        progressThumb.style.left = pct + '%';
+      }
+    });
+
+    // ── Progress bar: seeking ──
+    let isSeeking = false;
+
+    function seekFromEvent(e: MouseEvent) {
+      const rect = progressContainer.getBoundingClientRect();
+      const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+      const pct = x / rect.width;
+      video.currentTime = pct * video.duration;
+    }
+
+    progressContainer.addEventListener('mousedown', (e: MouseEvent) => {
+      isSeeking = true;
+      seekFromEvent(e);
+    });
+
+    progressContainer.addEventListener('mousemove', (e: MouseEvent) => {
+      const rect = progressContainer.getBoundingClientRect();
+      const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+      const pct = (x / rect.width) * 100;
+      progressHover.style.width = pct + '%';
+    });
+
+    progressContainer.addEventListener('mouseleave', () => {
+      progressHover.style.width = '0%';
+    });
+
+    document.addEventListener('mousemove', (e: MouseEvent) => {
+      if (isSeeking) {
+        seekFromEvent(e);
+      }
+    });
+
+    document.addEventListener('mouseup', () => {
+      isSeeking = false;
+    });
+
+    video.addEventListener('play', updatePlayPauseUI);
+    video.addEventListener('pause', updatePlayPauseUI);
+    video.addEventListener('volumechange', updatePlayPauseUI);
+
+    // ── IntersectionObserver — staggered entry, fires ONCE ──
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
+          if (entry.isIntersecting && !hasAnimated) {
+            hasAnimated = true;
+
+            // 1. Static flash on video frame
+            setTimeout(() => {
+              staticOverlay.classList.add('flash');
+              staticOverlay.addEventListener('animationend', () => {
+                staticOverlay.classList.remove('flash');
+              }, { once: true });
+              // Start muted autoplay preview
+              video.play().catch(() => {});
+            }, 200);
+
+            // 2. Typewriter on tag
+            setTimeout(() => {
+              tag.classList.add('typing');
+            }, 400);
+
+            // 3. Clip-path reveal on title
+            setTimeout(() => {
+              title.classList.add('revealing');
+            }, 800);
+
+            // 4. Tagline fade
+            setTimeout(() => {
+              tagline.classList.add('visible');
+            }, 1200);
+
+            // 5. Description fade
+            setTimeout(() => {
+              desc.classList.add('visible');
+            }, 1350);
+
+            // 6. Credentials
+            setTimeout(() => {
+              credentials.classList.add('visible');
+            }, 1500);
+
+            // 7. Specs
+            setTimeout(() => {
+              specs.classList.add('visible');
+            }, 1650);
+
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.15 }
     );
-    reveals.forEach((el) => observer.observe(el));
+
+    observer.observe(section);
   }
 
   if (document.readyState === 'loading') {
