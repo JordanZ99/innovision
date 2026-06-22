@@ -179,21 +179,6 @@ ul, ol {
   97% { transform: translate(-1px, -1px); }
 }
 
-@keyframes glitchColor {
-  0%, 92%, 100% {
-    text-shadow: none;
-  }
-  93% {
-    text-shadow: -2px 0 var(--color-red-neon), 2px 0 var(--color-blue-neon);
-  }
-  95% {
-    text-shadow: 2px 0 var(--color-red-neon), -2px 0 var(--color-blue-neon);
-  }
-  97% {
-    text-shadow: -1px 0 var(--color-blue-neon), 1px 0 var(--color-red-neon);
-  }
-}
-
 @keyframes marqueeScroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }

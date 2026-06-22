@@ -141,7 +141,6 @@
     line-height: 0.9;
     letter-spacing: -0.02em;
     text-transform: uppercase;
-    animation: glitchColor 6s ease infinite;
     position: relative;
   }
 
@@ -158,16 +157,46 @@
 
   .hero__title::before {
     color: var(--color-red-neon);
-    animation: glitchColor 6s ease infinite;
-    clip-path: inset(0 0 65% 0);
     opacity: 0.4;
+    animation: crtSweepRed 8s linear infinite;
   }
 
   .hero__title::after {
     color: var(--color-blue-neon);
-    animation: glitchColor 6s ease infinite reverse;
-    clip-path: inset(65% 0 0 0);
     opacity: 0.4;
+    animation: crtSweepBlue 8s linear infinite;
+  }
+
+  @keyframes crtSweepRed {
+    0%   { clip-path: inset(0 0 100% 0); transform: translateX(0); }
+    5%   { clip-path: inset(0 0 90% 0);  transform: translateX(-2px); }
+    15%  { clip-path: inset(0 0 70% 0);  transform: translateX(3px); }
+    25%  { clip-path: inset(0 0 50% 0);  transform: translateX(-1px); }
+    35%  { clip-path: inset(0 0 30% 0);  transform: translateX(2px); }
+    45%  { clip-path: inset(0 0 10% 0);  transform: translateX(-2px); }
+    50%  { clip-path: inset(0 0 0% 0);   transform: translateX(1px); }
+    55%  { clip-path: inset(10% 0 0 0);  transform: translateX(-1px); }
+    65%  { clip-path: inset(30% 0 0 0);  transform: translateX(2px); }
+    75%  { clip-path: inset(50% 0 0 0);  transform: translateX(-3px); }
+    85%  { clip-path: inset(70% 0 0 0);  transform: translateX(1px); }
+    95%  { clip-path: inset(90% 0 0 0);  transform: translateX(-2px); }
+    100% { clip-path: inset(100% 0 0 0); transform: translateX(0); }
+  }
+
+  @keyframes crtSweepBlue {
+    0%   { clip-path: inset(0 0 100% 0); transform: translateX(0); }
+    5%   { clip-path: inset(0 0 90% 0);  transform: translateX(2px); }
+    15%  { clip-path: inset(0 0 70% 0);  transform: translateX(-3px); }
+    25%  { clip-path: inset(0 0 50% 0);  transform: translateX(1px); }
+    35%  { clip-path: inset(0 0 30% 0);  transform: translateX(-2px); }
+    45%  { clip-path: inset(0 0 10% 0);  transform: translateX(2px); }
+    50%  { clip-path: inset(0 0 0% 0);   transform: translateX(-1px); }
+    55%  { clip-path: inset(10% 0 0 0);  transform: translateX(1px); }
+    65%  { clip-path: inset(30% 0 0 0);  transform: translateX(-2px); }
+    75%  { clip-path: inset(50% 0 0 0);  transform: translateX(3px); }
+    85%  { clip-path: inset(70% 0 0 0);  transform: translateX(-1px); }
+    95%  { clip-path: inset(90% 0 0 0);  transform: translateX(2px); }
+    100% { clip-path: inset(100% 0 0 0); transform: translateX(0); }
   }
 
   .hero__subtitle {
@@ -414,34 +443,21 @@
         function triggerGlitch() {
           const tl = gsap.timeline({
             onComplete: () => {
-              // Random next glitch in 4-10 seconds
-              setTimeout(triggerGlitch, 4000 + Math.random() * 6000);
+              setTimeout(triggerGlitch, 6000 + Math.random() * 8000);
             }
           });
 
           tl.to(title, {
-            x: gsap.utils.random(-3, 3),
+            x: gsap.utils.random(-2, 2),
             duration: 0.05,
           })
           .to(title, {
-            x: gsap.utils.random(-2, 2),
+            x: gsap.utils.random(-1, 1),
             duration: 0.05,
           })
           .to(title, {
             x: 0,
             duration: 0.05,
-          })
-          .to(title, {
-            textShadow: `-2px 0 #FF1B3D, 2px 0 #00D4FF`,
-            duration: 0.05,
-          })
-          .to(title, {
-            textShadow: `2px 0 #FF1B3D, -2px 0 #00D4FF`,
-            duration: 0.05,
-          })
-          .to(title, {
-            textShadow: 'none',
-            duration: 0.1,
           });
         }
 
