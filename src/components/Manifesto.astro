@@ -15,27 +15,27 @@
     <!-- Terminal body -->
     <div class="manifesto__body">
       <div class="manifesto__header">
-        <span class="manifesto__prompt">&gt; RUNNING FULL SYSTEM SCAN...</span>
+        <span class="manifesto__prompt" data-i18n="manifesto.header">&gt; RUNNING FULL SYSTEM SCAN...</span>
         <span class="manifesto__cursor">_</span>
       </div>
 
       <div class="manifesto__text">
-        <p class="manifesto__paragraph" data-reveal>
+        <p class="manifesto__paragraph" data-reveal data-i18n-html="manifesto.p1">
           Creemos en la <em>soberanía de la imagen</em>. En un mundo saturado de algoritmos y contenido descartable, producimos piezas que no piden permiso.
         </p>
-        <p class="manifesto__paragraph" data-reveal>
+        <p class="manifesto__paragraph" data-reveal data-i18n-html="manifesto.p2">
           Cada frame es una declaración. Cada corte, una decisión deliberada. No seguimos tendencias — <em>las documentamos desde adentro</em>.
         </p>
-        <p class="manifesto__paragraph" data-reveal>
+        <p class="manifesto__paragraph" data-reveal data-i18n-html="manifesto.p3">
           Nacimos en Quintana Roo, pero nuestro lenguaje es universal: <em>la calle habla a través de la lente</em>. Hip-hop, reggaetón, cultura urbana — filtrada sin filtros.
         </p>
-        <p class="manifesto__paragraph" data-reveal>
+        <p class="manifesto__paragraph" data-reveal data-i18n-html="manifesto.p4">
           <em>Somos soberanos de nuestra narrativa.</em> Producción cinematográfica que no negocia su integridad.
         </p>
       </div>
 
       <div class="manifesto__footer-text">
-        <span class="manifesto__prompt manifesto__prompt--green">&gt; SCAN COMPLETE. INTEGRITY: 100%</span>
+        <span class="manifesto__prompt manifesto__prompt--green" data-i18n="manifesto.footer">&gt; SCAN COMPLETE. INTEGRITY: 100%</span>
       </div>
     </div>
   </div>
@@ -128,9 +128,9 @@
 
   /* ── Manifesto text ── */
   .manifesto__paragraph {
-    font-family: var(--font-serif);
-    font-size: clamp(18px, 2.5vw, 28px);
-    line-height: 1.6;
+    font-family: var(--font-mono);
+    font-size: clamp(14px, 1.6vw, 17px);
+    line-height: 1.8;
     color: var(--color-white-static);
     margin-bottom: 32px;
     opacity: 0;

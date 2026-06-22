@@ -12,16 +12,15 @@ const services = [
 <section class="services section-pad" id="services">
   <!-- IMAGEN FALTANTE: mapa topográfico Quintana Roo (used as subtle background at 5% opacity) -->
 
-  <div class="services__header reveal">
-    <span class="services__index">[ 02 ]</span>
-    <h2 class="services__title">CAPABILITIES</h2>
+  <div class="services__header reveal">        <span class="services__index" data-i18n="services.index">[ 02 ]</span>
+        <h2 class="services__title" data-i18n="services.title">CAPABILITIES</h2>
   </div>
 
   <div class="services__list">
     {services.map((service) => (
       <div class="services__item reveal">
         <span class="services__item-id">{service.id}</span>
-        <span class="services__item-name">{service.name}</span>
+        <span class="services__item-name" data-i18n={`services.s${parseInt(service.id)}`}>{service.name}</span>
         <span class="services__item-dots"></span>
         <span class="services__item-hex">// {service.hex}</span>
       </div>
