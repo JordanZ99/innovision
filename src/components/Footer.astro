@@ -6,11 +6,8 @@
   <div class="footer__inner">
     <!-- Logo -->
     <div class="footer__logo">
-      <img src="/logo.png" alt="INNOVISION" width="48" height="48" />
+      <img src="/logo.png" alt="INNOVISION" />
     </div>
-
-    <!-- Watermark -->
-    <div class="footer__watermark" aria-hidden="true">INNOVISION</div>
 
     <!-- Social links -->
     <div class="footer__socials">
@@ -65,26 +62,9 @@
   }
 
   .footer__logo img {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    object-fit: cover;
-    opacity: 0.8;
-  }
-
-  .footer__watermark {
-    font-family: var(--font-display);
-    font-size: clamp(60px, 10vw, 140px);
-    color: var(--color-white-static);
-    opacity: 0.03;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    white-space: nowrap;
-    pointer-events: none;
-    user-select: none;
-    text-transform: uppercase;
+    height: clamp(54px, 9vw, 126px);
+    width: auto;
+    opacity: 0.15;
   }
 
   .footer__socials {
