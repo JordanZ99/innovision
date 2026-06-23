@@ -18,14 +18,11 @@
       <a href="#services" class="nav__link" data-text="SERVICES" data-i18n="nav.services">SERVICES</a>
       <span class="nav__separator">/</span>
       <a href="#contact" class="nav__link" data-text="CONTACT" data-i18n="nav.contact">CONTACT</a>
+      <button class="nav__lang nav__lang--mobile" id="lang-toggle-mobile" aria-label="Toggle language">ESP</button>
     </div>
 
     <div class="nav__right">
       <button class="nav__lang" id="lang-toggle" aria-label="Toggle language">ESP</button>
-      <div class="nav__status">
-        <span class="nav__status-dot"></span>
-        <span class="nav__status-text">SYSTEM: ONLINE</span>
-      </div>
     </div>
 
     <!-- Mobile menu toggle -->
@@ -203,6 +200,11 @@
     transition: all 0.3s ease;
   }
 
+  /* Mobile lang toggle — hidden on desktop */
+  .nav__lang--mobile {
+    display: none;
+  }
+
   @media (max-width: 900px) {
     .nav__links,
     .nav__right {
@@ -231,14 +233,11 @@
       display: none;
     }
 
-    .nav__right {
-      display: flex;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      padding: 12px 20px;
-      background: rgba(10, 10, 10, 0.95);
-      border-bottom: 1px solid var(--color-steel);
+    .nav__links.open .nav__lang--mobile {
+      display: inline-block;
+      margin-top: 8px;
+      border-top: 1px solid var(--color-steel);
+      padding-top: 12px;
     }
   }
 </style>
@@ -282,6 +281,24 @@
         link.addEventListener('click', () => {
           links.classList.remove('open');
         });
+      });
+    }
+
+    // Mobile lang toggle — syncs with desktop lang toggle
+    const mobileLangBtn = document.getElementById('lang-toggle-mobile');
+    const desktopLangBtn = document.getElementById('lang-toggle');
+    if (mobileLangBtn && desktopLangBtn) {
+      // Keep mobile label in sync with desktop
+      mobileLangBtn.textContent = desktopLangBtn.textContent;
+      mobileLangBtn.addEventListener('click', () => {
+        desktopLangBtn.click();
+        mobileLangBtn.textContent = desktopLangBtn.textContent;
+      });
+      // Also sync when desktop button changes
+      desktopLangBtn.addEventListener('click', () => {
+        setTimeout(() => {
+          mobileLangBtn.textContent = desktopLangBtn.textContent;
+        }, 10);
       });
     }
 
