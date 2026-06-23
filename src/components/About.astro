@@ -28,13 +28,12 @@
         <!-- Gradient overlay -->
         <div class="about__video-overlay"></div>
 
-        <!-- Video — single state: starts muted + loop for silent preview -->
+        <!-- Video — starts paused, user clicks play to start with audio -->
         <video
           id="about-video"
           src="/VideoInnovision.mp4"
           class="about__video"
           muted
-          loop
           playsinline
           preload="auto"
         ></video>
@@ -729,9 +728,8 @@
 
     playBtn.addEventListener('click', () => {
       if (video.paused || video.muted) {
-        // Activate: unmute, remove loop, continue from current position, play
+        // Activate: unmute and play from current position
         video.muted = false;
-        video.removeAttribute('loop');
         video.play().catch(() => {});
       } else {
         // Pause
@@ -833,8 +831,7 @@
               staticOverlay.addEventListener('animationend', () => {
                 staticOverlay.classList.remove('flash');
               }, { once: true });
-              // Start muted autoplay preview
-              video.play().catch(() => {});
+              // Video starts paused — user clicks play to start
             }, 200);
 
             // 2. Typewriter on tag
