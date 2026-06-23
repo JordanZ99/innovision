@@ -129,6 +129,7 @@
   .about {
     background: var(--color-void);
     position: relative;
+    z-index: 10;
   }
 
   .about__inner {
@@ -690,9 +691,6 @@
     const progressContainer = document.getElementById('about-progress') as HTMLElement;
     const videoFrame = document.getElementById('about-video-frame') as HTMLElement;
 
-    // ── Single-fire flag for entry animations ──
-    let hasAnimated = false;
-
 
 
     // ── STATUS text: driven by video events, reads video properties ──
@@ -819,6 +817,7 @@
     video.addEventListener('volumechange', updatePlayPauseUI);
 
     // ── IntersectionObserver — staggered entry, fires ONCE ──
+    let hasAnimated = false;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -831,7 +830,6 @@
               staticOverlay.addEventListener('animationend', () => {
                 staticOverlay.classList.remove('flash');
               }, { once: true });
-              // Video starts paused — user clicks play to start
             }, 200);
 
             // 2. Typewriter on tag
