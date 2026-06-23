@@ -44,6 +44,11 @@
     <span class="hero__scroll-text" data-i18n="hero.scroll">SCROLL TO DECODE</span>
   </div>
 
+  <!-- Logo -->
+  <div class="hero__logo">
+    <img src="/logo.png" alt="InnoVision" class="hero__logo-img" />
+  </div>
+
   <!-- Corner brackets decoration -->
   <div class="hero__corner hero__corner--tl" aria-hidden="true"></div>
   <div class="hero__corner hero__corner--tr" aria-hidden="true"></div>
@@ -337,6 +342,26 @@
   }
 
   /* ── Scroll indicator ── */
+  /* ── Logo ── */
+  .hero__logo {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    z-index: 2;
+    opacity: 0;
+  }
+
+  .hero.loaded .hero__logo {
+    transition: opacity 1s ease 1.4s;
+    opacity: 1;
+  }
+
+  .hero__logo-img {
+    height: 48px;
+    width: auto;
+    display: block;
+  }
+
   .hero__scroll {
     position: absolute;
     bottom: 40px;
@@ -413,6 +438,13 @@
     .hero__hud-coords--tr {
       right: 20px;
       top: 80px;
+    }
+    .hero__logo {
+      bottom: 20px;
+      left: 20px;
+    }
+    .hero__logo-img {
+      height: 36px;
     }
     .hero__scroll {
       right: 20px;
