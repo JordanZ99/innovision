@@ -41,6 +41,11 @@
       </div>
     </div>
   </div>
+
+  <!-- Section end divider -->
+  <div class="manifesto__end">
+    <img src="/SectionEnd.png" alt="" class="manifesto__end-img" aria-hidden="true" />
+  </div>
 </section>
 
 <style>
@@ -192,9 +197,30 @@
     border-top: 1px solid var(--color-steel);
   }
 
+  /* ── Section end divider ── */
+  .manifesto__end {
+    position: relative;
+    z-index: 1;
+    line-height: 0;
+    margin-left: -40px;
+    margin-right: -40px;
+    margin-bottom: -120px;
+  }
+
+  .manifesto__end-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
   @media (max-width: 768px) {
     .manifesto__body {
       padding: 24px;
+    }
+    .manifesto__end {
+      margin-left: -20px;
+      margin-right: -20px;
+      margin-bottom: -80px;
     }
   }
 </style>
