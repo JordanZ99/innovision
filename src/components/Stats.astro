@@ -9,8 +9,6 @@ const stats = [
 ---
 
 <section class="stats section-pad" id="stats">
-  <div class="stats__sweep" aria-hidden="true"></div>
-
   <div class="stats__grid">
     {stats.map((stat, i) => (
       <div class="stats__panel reveal">
@@ -32,24 +30,6 @@ const stats = [
   .stats {
     background: var(--color-concrete);
     position: relative;
-    overflow: hidden;
-  }
-
-  .stats__sweep {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 3px,
-      rgba(0, 212, 255, 0.02) 3px,
-      rgba(0, 212, 255, 0.02) 6px
-    );
-    animation: floatScanline 2s linear infinite;
-    pointer-events: none;
   }
 
   .stats__grid {

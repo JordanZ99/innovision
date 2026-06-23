@@ -34,8 +34,22 @@ const services = [
     position: relative;
   }
 
+  .services::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.35) 1px, transparent 1px);
+    background-size: 32px 32px;
+    z-index: 0;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+    pointer-events: none;
+  }
+
   .services__header {
     margin-bottom: 60px;
+    position: relative;
+    z-index: 1;
   }
 
   .services__index {
@@ -59,6 +73,8 @@ const services = [
   /* ── List ── */
   .services__list {
     max-width: 900px;
+    position: relative;
+    z-index: 1;
   }
 
   .services__item {
