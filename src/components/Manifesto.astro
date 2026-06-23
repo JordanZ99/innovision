@@ -20,17 +20,19 @@
       </div>
 
       <div class="manifesto__text">
+        <h2 class="manifesto__title" data-reveal data-i18n="manifesto.title">INNOVISION</h2>
+        <p class="manifesto__subtitle" data-reveal data-i18n="manifesto.subtitle">Manifiesto: Soberanía Digital 2026 - 2030</p>
         <p class="manifesto__paragraph" data-reveal data-i18n-html="manifesto.p1">
-          Creemos en la <em>soberanía de la imagen</em>. En un mundo saturado de algoritmos y contenido descartable, producimos piezas que no piden permiso.
+          La división de Inteligencia diseña la estrategia; InnoVision ejecuta la operatividad. Juntos, estamos comprometidos con la creación de un ecosistema completo y autosustentable, donde los datos, la audiencia y el dinero se quedan contigo.
         </p>
         <p class="manifesto__paragraph" data-reveal data-i18n-html="manifesto.p2">
-          Cada frame es una declaración. Cada corte, una decisión deliberada. No seguimos tendencias — <em>las documentamos desde adentro</em>.
+          Las plataformas tradicionales de streaming de video y música han convertido al creador en un inquilino. Se quedan con los mayores porcentajes de ganancia y dictan las reglas del juego, cobrando un "impuesto" altísimo simplemente por prestarte un ecosistema de distribución que tú mismo alimentas con tu talento.
         </p>
         <p class="manifesto__paragraph" data-reveal data-i18n-html="manifesto.p3">
-          Nacimos en Quintana Roo, pero nuestro lenguaje es universal: <em>la calle habla a través de la lente</em>. Hip-hop, reggaetón, cultura urbana — filtrada sin filtros.
+          Por eso, activamos el <em>Plan de Soberanía Digital 2026 - 2030</em>.
         </p>
         <p class="manifesto__paragraph" data-reveal data-i18n-html="manifesto.p4">
-          <em>Somos soberanos de nuestra narrativa.</em> Producción cinematográfica que no negocia su integridad.
+          Nuestro compromiso es guiar a quienes estén listos para dejar de depender de terceros. Construiremos juntos nuevos sistemas, infraestructuras cerradas y flujos económicos que te permitan lograr una distribución propia, blindar tu percepción pública y tener control absoluto y total de tu dinero y tus datos.
         </p>
       </div>
 
@@ -143,6 +145,41 @@
     transform: translateY(0);
   }
 
+  .manifesto__title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 400;
+    color: var(--color-white-static);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+  }
+
+  .manifesto__title.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .manifesto__subtitle {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-orange);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s var(--ease-out-expo) 0.1s, transform 0.8s var(--ease-out-expo) 0.1s;
+  }
+
+  .manifesto__subtitle.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   .manifesto__paragraph em {
     color: var(--color-orange);
     font-style: italic;
@@ -164,15 +201,15 @@
 
 <script>
   function initManifesto() {
-    // IntersectionObserver for paragraphs
-    const paragraphs = document.querySelectorAll('.manifesto__paragraph');
+    // All revealable elements: title, subtitle, then paragraphs
+    const revealables = document.querySelectorAll('.manifesto__title, .manifesto__subtitle, .manifesto__paragraph');
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Stagger the reveal
-            const delay = Array.from(paragraphs).indexOf(entry.target) * 200;
+            // Stagger the reveal by position in sequence
+            const delay = Array.from(revealables).indexOf(entry.target) * 200;
             setTimeout(() => {
               entry.target.classList.add('revealed');
             }, delay);
@@ -183,7 +220,7 @@
       { threshold: 0.3 }
     );
 
-    paragraphs.forEach((p) => observer.observe(p));
+    revealables.forEach((el) => observer.observe(el));
 
     // Reveal terminal wrapper
     const terminal = document.querySelector('.manifesto__terminal');
