@@ -1,5 +1,5 @@
 ---
-// Manifesto — Digital Sovereignty terminal
+// Manifesto — Interactive CLI terminal with command modals
 ---
 
 <section class="manifesto section-pad" id="manifesto">
@@ -14,30 +14,101 @@
 
     <!-- Terminal body -->
     <div class="manifesto__body">
-      <div class="manifesto__header">
-        <span class="manifesto__prompt" data-i18n="manifesto.header">&gt; RUNNING FULL SYSTEM SCAN...</span>
-        <span class="manifesto__cursor">_</span>
-      </div>
+      <div class="manifesto__cli">
+        <p class="manifesto__cli-line manifesto__cli-line--orange">&gt; INNOVISION OS v2.6 // SOBERANÍA DIGITAL</p>
+        <p class="manifesto__cli-line">&gt; Selecciona un comando para ejecutar el protocolo correspondiente:</p>
+        <p class="manifesto__cli-line">&gt;</p>
 
-      <div class="manifesto__text">
-        <h2 class="manifesto__title" data-reveal data-i18n="manifesto.title">INNOVISION</h2>
-        <p class="manifesto__subtitle" data-reveal data-i18n="manifesto.subtitle">Manifiesto: Soberanía Digital 2026 - 2030</p>
-        <p class="manifesto__paragraph" data-reveal data-i18n-html="manifesto.p1">
-          La división de Inteligencia diseña la estrategia; InnoVision ejecuta la operatividad. Juntos, estamos comprometidos con la creación de un ecosistema completo y autosustentable, donde los datos, la audiencia y el dinero se quedan contigo.
-        </p>
-        <p class="manifesto__paragraph" data-reveal data-i18n-html="manifesto.p2">
-          Las plataformas tradicionales de streaming de video y música han convertido al creador en un inquilino. Se quedan con los mayores porcentajes de ganancia y dictan las reglas del juego, cobrando un "impuesto" altísimo simplemente por prestarte un ecosistema de distribución que tú mismo alimentas con tu talento.
-        </p>
-        <p class="manifesto__paragraph" data-reveal data-i18n-html="manifesto.p3">
-          Por eso, activamos el <em>Plan de Soberanía Digital 2026 - 2030</em>.
-        </p>
-        <p class="manifesto__paragraph" data-reveal data-i18n-html="manifesto.p4">
-          Nuestro compromiso es guiar a quienes estén listos para dejar de depender de terceros. Construiremos juntos nuevos sistemas, infraestructuras cerradas y flujos económicos que te permitan lograr una distribución propia, blindar tu percepción pública y tener control absoluto y total de tu dinero y tus datos.
-        </p>
-      </div>
+        <button class="manifesto__cmd" data-modal="info">
+          <span class="manifesto__cmd-bracket">[</span><span class="manifesto__cmd-name">./info.sh</span><span class="manifesto__cmd-bracket">]</span>
+          <span class="manifesto__cmd-desc">-- ¿Qué es InnoVision?</span>
+        </button>
 
-      <div class="manifesto__footer-text">
-        <span class="manifesto__prompt manifesto__prompt--green" data-i18n="manifesto.footer">&gt; SCAN COMPLETE. INTEGRITY: 100%</span>
+        <button class="manifesto__cmd" data-modal="services">
+          <span class="manifesto__cmd-bracket">[</span><span class="manifesto__cmd-name">./services.bat</span><span class="manifesto__cmd-bracket">]</span>
+          <span class="manifesto__cmd-desc">-- ¿Qué soluciones desplegamos?</span>
+        </button>
+
+        <button class="manifesto__cmd" data-modal="contact">
+          <span class="manifesto__cmd-bracket">[</span><span class="manifesto__cmd-name">./contact.exe</span><span class="manifesto__cmd-bracket">]</span>
+          <span class="manifesto__cmd-desc">-- Activar canal de comunicación</span>
+        </button>
+
+        <p class="manifesto__cli-line">&gt; <span class="manifesto__cursor">_</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Modal: info.sh ═══ -->
+  <div class="modal" id="modal-info" role="dialog" aria-modal="true">
+    <div class="modal__backdrop" data-close-modal></div>
+    <div class="modal__window">
+      <div class="modal__bar">
+        <span class="manifesto__dot manifesto__dot--red" data-close-modal></span>
+        <span class="manifesto__dot manifesto__dot--yellow"></span>
+        <span class="manifesto__dot manifesto__dot--green"></span>
+        <span class="modal__bar-title">INFO.SH — INNOVISION</span>
+        <button class="modal__close" data-close-modal aria-label="Close">[CLOSE]</button>
+      </div>
+      <div class="modal__body">
+        <p class="modal__line modal__line--orange">&gt; EJECUTANDO INFO.SH...</p>
+        <p class="modal__line">&gt; INNOVISION es una división operativa diseñada para romper la dependencia de terceros.</p>
+        <p class="modal__line">&gt; Creamos infraestructuras cerradas y flujos económicos propios para que los datos,</p>
+        <p class="modal__line">&gt; la audiencia y el rendimiento se queden en manos del creador.</p>
+        <p class="modal__line modal__line--green">&gt; [OPERACIÓN COMPLETA]</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Modal: services.bat ═══ -->
+  <div class="modal" id="modal-services" role="dialog" aria-modal="true">
+    <div class="modal__backdrop" data-close-modal></div>
+    <div class="modal__window">
+      <div class="modal__bar">
+        <span class="manifesto__dot manifesto__dot--red" data-close-modal></span>
+        <span class="manifesto__dot manifesto__dot--yellow"></span>
+        <span class="manifesto__dot manifesto__dot--green"></span>
+        <span class="modal__bar-title">SERVICES.BAT — INNOVISION</span>
+        <button class="modal__close" data-close-modal aria-label="Close">[CLOSE]</button>
+      </div>
+      <div class="modal__body">
+        <p class="modal__line modal__line--orange">&gt; EJECUTANDO SERVICES.BAT...</p>
+        <p class="modal__line">&gt;</p>
+        <p class="modal__line modal__line--amber">&gt; [01] AUDIOVISUAL CORE:</p>
+        <p class="modal__line">&gt; Producción y dirección de videoclips de alto impacto.</p>
+        <p class="modal__line">&gt;</p>
+        <p class="modal__line modal__line--amber">&gt; [02] DIGITAL ARCHITECTURE:</p>
+        <p class="modal__line">&gt; Despliegue de plataformas web independientes y ecosistemas autosustentables.</p>
+        <p class="modal__line">&gt;</p>
+        <p class="modal__line modal__line--amber">&gt; [03] BRAND SHIELD:</p>
+        <p class="modal__line">&gt; Blindaje de percepción pública y estrategia de identidad digital.</p>
+        <p class="modal__line modal__line--green">&gt; [OPERACIÓN COMPLETA]</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Modal: contact.exe ═══ -->
+  <div class="modal" id="modal-contact" role="dialog" aria-modal="true">
+    <div class="modal__backdrop" data-close-modal></div>
+    <div class="modal__window">
+      <div class="modal__bar">
+        <span class="manifesto__dot manifesto__dot--red" data-close-modal></span>
+        <span class="manifesto__dot manifesto__dot--yellow"></span>
+        <span class="manifesto__dot manifesto__dot--green"></span>
+        <span class="modal__bar-title">CONTACT.EXE — INNOVISION</span>
+        <button class="modal__close" data-close-modal aria-label="Close">[CLOSE]</button>
+      </div>
+      <div class="modal__body">
+        <p class="modal__line modal__line--orange">&gt; EJECUTANDO CONTACT.EXE...</p>
+        <p class="modal__line">&gt;</p>
+        <p class="modal__line">&gt; ENLACE DE COMUNICACIÓN ABIERTO.</p>
+        <p class="modal__line">&gt; Para iniciar un protocolo de desarrollo o producción,</p>
+        <p class="modal__line">&gt; envía tus coordenadas.</p>
+        <p class="modal__line">&gt;</p>
+        <a href="#contact" class="modal__cta" data-close-modal>
+          <span class="modal__cta-text">&gt; ESTABLECER CONEXIÓN</span>
+        </a>
+        <p class="modal__line modal__line--green">&gt; [ENLACE ACTIVO]</p>
       </div>
     </div>
   </div>
@@ -91,6 +162,12 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  .manifesto__dot:hover {
+    opacity: 0.7;
   }
 
   .manifesto__dot--red { background: var(--color-red-neon); }
@@ -111,90 +188,66 @@
     padding: 40px;
   }
 
-  .manifesto__header {
-    margin-bottom: 40px;
-  }
-
-  .manifesto__prompt {
+  /* ── CLI interface ── */
+  .manifesto__cli {
     font-family: var(--font-mono);
     font-size: 13px;
-    color: var(--color-green-neon);
-    letter-spacing: 0.05em;
+    line-height: 2;
   }
 
-  .manifesto__prompt--green {
-    color: var(--color-green-neon);
+  .manifesto__cli-line {
+    color: var(--color-white-static);
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+
+  .manifesto__cli-line--orange {
+    color: var(--color-orange);
   }
 
   .manifesto__cursor {
     display: inline-block;
     color: var(--color-green-neon);
     animation: cursorBlink 0.7s step-end infinite;
-    margin-left: 2px;
   }
 
-  /* ── Manifesto text ── */
-  .manifesto__paragraph {
-    font-family: var(--font-mono);
-    font-size: clamp(14px, 1.6vw, 17px);
-    line-height: 1.8;
-    color: var(--color-white-static);
-    margin-bottom: 32px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
-  }
-
-  .manifesto__paragraph.revealed {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .manifesto__title {
-    font-family: var(--font-display);
-    font-size: clamp(36px, 5vw, 64px);
-    font-weight: 400;
-    color: var(--color-white-static);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
-  }
-
-  .manifesto__title.revealed {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .manifesto__subtitle {
+  /* ── Command buttons ── */
+  .manifesto__cmd {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
     font-family: var(--font-mono);
     font-size: 13px;
+    line-height: 2;
+    color: var(--color-white-static);
+    cursor: pointer;
+    padding: 2px 0;
+    transition: color 0.2s ease;
+    letter-spacing: 0.05em;
+  }
+
+  .manifesto__cmd:hover {
     color: var(--color-orange);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 36px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s var(--ease-out-expo) 0.1s, transform 0.8s var(--ease-out-expo) 0.1s;
   }
 
-  .manifesto__subtitle.revealed {
-    opacity: 1;
-    transform: translateY(0);
+  .manifesto__cmd:hover .manifesto__cmd-name {
+    color: var(--color-green-neon);
   }
 
-  .manifesto__paragraph em {
-    color: var(--color-orange);
-    font-style: italic;
+  .manifesto__cmd-bracket {
+    color: var(--color-steel);
   }
 
-  /* ── Footer text ── */
-  .manifesto__footer-text {
-    margin-top: 40px;
-    padding-top: 24px;
-    border-top: 1px solid var(--color-steel);
+  .manifesto__cmd-name {
+    color: var(--color-green-neon);
+    transition: color 0.2s ease;
+  }
+
+  .manifesto__cmd-desc {
+    color: var(--color-steel);
+    margin-left: 4px;
   }
 
   /* ── Section end divider ── */
@@ -214,10 +267,158 @@
     display: block;
   }
 
+  /* ═══════════════════════════════
+     MODAL SYSTEM
+     ═══════════════════════════════ */
+  .modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .modal.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    cursor: pointer;
+  }
+
+  .modal__window {
+    position: relative;
+    width: 90%;
+    max-width: 700px;
+    border: 1px solid var(--color-steel);
+    background: var(--color-void);
+    transform: translateY(20px) scale(0.97);
+    transition: transform 0.3s var(--ease-out-expo);
+    z-index: 1;
+  }
+
+  .modal.active .modal__window {
+    transform: translateY(0) scale(1);
+  }
+
+  .modal__bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-steel);
+    background: var(--color-concrete);
+  }
+
+  .modal__bar-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--color-steel);
+    margin-left: 12px;
+    text-transform: uppercase;
+    flex: 1;
+  }
+
+  .modal__close {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--color-red-neon);
+    background: none;
+    border: 1px solid var(--color-red-neon);
+    padding: 3px 10px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .modal__close:hover {
+    background: var(--color-red-neon);
+    color: var(--color-void);
+  }
+
+  .modal__body {
+    padding: 32px 40px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 2;
+  }
+
+  .modal__line {
+    color: var(--color-white-static);
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+  }
+
+  .modal__line--orange {
+    color: var(--color-orange);
+    margin-bottom: 12px;
+  }
+
+  .modal__line--amber {
+    color: var(--color-amber);
+  }
+
+  .modal__line--green {
+    color: var(--color-green-neon);
+    margin-top: 16px;
+  }
+
+  .modal__cta {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 24px;
+    border: 1px solid var(--color-orange);
+    background: transparent;
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  .modal__cta-text {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--color-orange);
+  }
+
+  .modal__cta:hover {
+    background: var(--color-orange);
+  }
+
+  .modal__cta:hover .modal__cta-text {
+    color: var(--color-void);
+  }
+
   @media (max-width: 768px) {
     .manifesto__body {
       padding: 24px;
     }
+
+    .manifesto__cli {
+      font-size: 11px;
+    }
+
+    .manifesto__cmd {
+      font-size: 11px;
+    }
+
+    .modal__body {
+      padding: 24px;
+    }
+
+    .modal__line {
+      font-size: 11px;
+    }
+
     .manifesto__end {
       margin-left: -20px;
       margin-right: -20px;
@@ -228,28 +429,7 @@
 
 <script>
   function initManifesto() {
-    // All revealable elements: title, subtitle, then paragraphs
-    const revealables = document.querySelectorAll('.manifesto__title, .manifesto__subtitle, .manifesto__paragraph');
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Stagger the reveal by position in sequence
-            const delay = Array.from(revealables).indexOf(entry.target) * 200;
-            setTimeout(() => {
-              entry.target.classList.add('revealed');
-            }, delay);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    revealables.forEach((el) => observer.observe(el));
-
-    // Reveal terminal wrapper
+    // ── Terminal reveal on scroll ──
     const terminal = document.querySelector('.manifesto__terminal');
     if (terminal) {
       const termObserver = new IntersectionObserver(
@@ -265,6 +445,45 @@
       );
       termObserver.observe(terminal);
     }
+
+    // ── Modal system ──
+    const modals = document.querySelectorAll('.modal');    function openModal(id: string) {
+      const modal = document.getElementById('modal-' + id);
+      if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeModal(modal: Element) {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Command buttons
+    document.querySelectorAll('.manifesto__cmd').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const modalId = btn.getAttribute('data-modal');
+        if (modalId) openModal(modalId);
+      });
+    });
+
+    // Close buttons
+    document.querySelectorAll('[data-close-modal]').forEach((el) => {
+      el.addEventListener('click', () => {
+        const modal = el.closest('.modal');
+        if (modal) closeModal(modal);
+      });
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        modals.forEach((m) => {
+          if (m.classList.contains('active')) closeModal(m);
+        });
+      }
+    });
   }
 
   if (document.readyState === 'loading') {
